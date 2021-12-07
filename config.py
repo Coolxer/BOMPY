@@ -1,0 +1,8 @@
+CONFIG = {
+    "APP_NAME": "BOMPY",
+    "AUTHOR": "LUKASZ MILOS",
+    "VERSION": "1.0.0",
+    
+    "DEFAULT_WIDTH": 600,
+    "DEFAULT_HEIGHT": 400,
+}
