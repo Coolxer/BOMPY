@@ -1,20 +1,34 @@
 import tkinter as tk
 
-from config import CONFIG
+from scenemanager import SceneManager
+from config import BASE_CONFIG, PAGES, PALETTE
 
 
-class Application(tk.Frame):
-    def __init__(self, *args, **kwargs):
-        self.root = tk.Tk()
+class Application(tk.Tk):
+    sceneManager: None
 
-        tk.Frame.__init__(self, self.root, *args, **kwargs)
+    def __init__(self):
+        tk.Tk.__init__(self)
 
-        self.root.title(
-            f"{CONFIG['APP_NAME']} | {CONFIG['AUTHOR']} | VER: {CONFIG['VERSION']}"
+        # main window settings
+        self.title(
+            f"{BASE_CONFIG['APP_NAME']} | {BASE_CONFIG['AUTHOR']} | VER: {BASE_CONFIG['VERSION']}"
         )
-        self.root.geometry(
-            f"{CONFIG['DEFAULT_WIDTH']}x{CONFIG['DEFAULT_HEIGHT']}"
+        self.geometry(
+            f"{BASE_CONFIG['WINDOW']['DEFAULT_WIDTH']}x{BASE_CONFIG['WINDOW']['DEFAULT_HEIGHT']}"
         )
+
+        self.minsize(
+            BASE_CONFIG["WINDOW"]["MIN_WIDTH"],
+            BASE_CONFIG["WINDOW"]["MIN_HEIGHT"],
+        )
+        self.configure(background=PALETTE["BACKGROUND"])
+
+        # self.grid_rowconfigure(0, weight=1)
+        # self.grid_columnconfigure(0, weight=1)
+
+        # create scene manager
+        self.sceneManager = SceneManager(self)
 
     def run(self):
-        self.root.mainloop()
+        self.mainloop()

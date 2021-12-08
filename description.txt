@@ -1,0 +1,41 @@
+# FUNKCJE
+    BIG
+        - wczytanie gotowego zestawienia do przegladania / edycji
+        - utworzenie nowego zestawienia
+    
+    SMALL
+        - tworzenie po kliknieciu plusika, pojawia sie widget (formularz) do wypelnienia z cechami
+        - mozna rozwijac, zwijac elemnty zestawienia
+        - zaznaczajac element mozna go edytowac / usunac
+
+
+    OTHERS
+        - automatyczny zapis do pliku po pelnym dodaniu kazdego elementu / modyfikacji / usunieci
+
+
+# OKNA
+    - menu glowne
+        - wczytaj zestawienie (file dialog) => przejscie do glownej sceny
+        - nowe zestawienie => przejscie do glownej sceny
+        - credits
+        - wyjscie
+
+    - glowna scena
+        - tutaj widoczne jest zestawienie i mozliwe do wykonania wszelkie operacje
+        - powrot do menu
+        - wyjscie
+
+    - credits 
+        - opis programu
+        - autor
+        - linki do githuba
+
+# INNE
+    - po wybraniu pliku nastepuje pelna analiza czy jest on poprawny (nieuszkodzony)
+        - jesli poprawny to przejsce do okna glownego
+        - inaczej komunikat modalny i powrot do menu glownego
+
+    - analiza pliku opiera sie na:
+        - sprawdzeniu czy na poczatku jest zawarta informacja o celu pliku np. "application": "bompy"
+        - sprwadzeniu czy wszystkie elementy maja wymagane klucze tj. nazwa, ilosc itp.
+
