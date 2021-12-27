@@ -11,7 +11,11 @@ class SceneManager:
 
     def __init__(self, window):
         self.window = window
-        self.switch_scene(PAGES["MENU"])
+
+        # UNCOMMENT LATER
+        # self.switch_scene(PAGES["MENU"])
+
+        self.switch_scene(PAGES["WORKPAGE"])
 
     def switch_scene(self, scene_index):
         scene = self.map_index_to_scene(scene_index)

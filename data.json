@@ -1,0 +1,38 @@
+{
+    "name": "sruba",
+    "identifier": "#0153472",
+    "quantity": 3,
+    "unit": "szt.",
+    "unit_cost": 2.5,
+    "total_cost": 7.5,
+    "sub_parts": [
+        {
+            "name": "nakretka",
+            "identifier": "#015672",
+            "quantity": 5,
+            "unit": "szt.",
+            "unit_cost": 0.5,
+            "total_cost": 2.5,
+            "sub_parts": [
+                {
+                    "name": "metal",
+                    "identifier": "#0123",
+                    "quantity": 0.5,
+                    "unit": "kg",
+                    "unit_cost": 57.59,
+                    "total_cost": 28.795,
+                    "sub_parts": []
+                }
+            ]
+        },
+        {
+            "name": "drozdo",
+            "identifier": "#asdasdasd",
+            "quantity": 1,
+            "unit": "szt.",
+            "unit_cost": 0,
+            "total_cost": 0,
+            "sub_parts": []
+        }
+    ]
+}

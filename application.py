@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 
 from scenemanager import SceneManager
 from config import BASE_CONFIG, PAGES, PALETTE
@@ -9,6 +10,9 @@ class Application(tk.Tk):
 
     def __init__(self):
         tk.Tk.__init__(self)
+
+        style = ttk.Style()
+        style.theme_use("clam")
 
         # main window settings
         self.title(

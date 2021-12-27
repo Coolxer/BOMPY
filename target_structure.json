@@ -1,0 +1,65 @@
+{
+  "name": "sruba",
+  "identifier": "#01",
+  "quantity": 3,
+  "unit": "szt.",
+  "unit_cost": 2.5,
+  "total_cost": 7.5,
+  "sub_parts": [
+    {
+      "name": "nakreta",
+      "identifier": "#02",
+      "quantity": 3,
+      "unit": "szt.",
+      "unit_cost": 2.5,
+      "total_cost": 7.5,
+      "sub_parts": []
+    },
+    {
+      "name": "gwozdz",
+      "identifier": "#03",
+      "quantity": 3,
+      "unit": "szt.",
+      "unit_cost": 2.5,
+      "total_cost": 7.5,
+      "sub_parts": [
+        {
+          "name": "ktos",
+          "identifier": "#04",
+          "quantity": 3,
+          "unit": "szt.",
+          "unit_cost": 2.5,
+          "total_cost": 7.5,
+          "sub_parts": []
+        }
+      ]
+    },
+    {
+      "name": "plyta",
+      "identifier": "#05",
+      "quantity": 3,
+      "unit": "szt.",
+      "unit_cost": 2.5,
+      "total_cost": 7.5,
+      "sub_parts": []
+    },
+    {
+      "name": "material",
+      "identifier": "#07",
+      "quantity": 3,
+      "unit": "szt.",
+      "unit_cost": 2.5,
+      "total_cost": 7.5,
+      "sub_parts": []
+    },
+    {
+      "name": "guma",
+      "identifier": "#08",
+      "quantity": 3,
+      "unit": "szt.",
+      "unit_cost": 2.5,
+      "total_cost": 7.5,
+      "sub_parts": []
+    }
+  ]
+}

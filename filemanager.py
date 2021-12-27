@@ -1,9 +1,28 @@
+import json
+
+
 class FileManager:
-    def __init__(self):
-        pass
+    path = None
 
-    def check_file_sum(self, file):
-        pass
+    def __init__(self, path):
+        self.path = path
 
-    def update_file(self, file, data):
-        pass
+    def load_from_file(self):
+        file = open(self.path, "r")
+
+        data = json.load(file)
+
+        file.close()
+
+        # if not self.valid_file(data):
+        #    return
+
+        return data
+
+    def valid_file(self, data):
+        return 1
+
+    def save_to_file(self, data):
+        file = open(self.path, "w+")
+        file.write(data)
+        file.close()
