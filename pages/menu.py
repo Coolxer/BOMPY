@@ -3,10 +3,11 @@ from tkinter import filedialog
 
 from config import PAGES, PALETTE, FONTS
 
-from filemanager import FileManager
+from core.filemanager import FileManager
 
 from components.page_header import PageHeader
 from components.button import Button
+
 
 class Menu(tk.Frame):
     def __init__(self, parent):
@@ -20,30 +21,30 @@ class Menu(tk.Frame):
             self,
             text="Utwórz zestawienie (BOM)",
             type="PRIMARY",
-            action=self.open_file_dialog,
-        ).grid(column=0, row=1, ipadx=20, pady=20)
+            command=self.open_file_dialog,
+        ).grid(row=1, column=0, ipadx=20, pady=20)
 
         Button(
             self,
             text="Wczytaj zestawienie (BOM)",
             type="PRIMARY",
-            action=self.open_file_dialog,
-        ).grid(column=0, row=2, ipadx=20, pady=20)
+            command=self.open_file_dialog,
+        ).grid(row=2, column=0, ipadx=20, pady=20)
 
         Button(
             self,
             "Informacje",
             "PRIMARY",
-            action=parent.switch_scene,
+            command=parent.switch_scene,
             arg=PAGES["CREDITS"],
-        ).grid(column=0, row=3, ipadx=20, pady=20)
+        ).grid(row=3, column=0, ipadx=20, pady=20)
 
         Button(
             self,
             "Wyjście",
             "DANGER",
-            action=parent.window.destroy,
-        ).grid(column=0, row=4, ipadx=20, pady=20)
+            command=parent.window.destroy,
+        ).grid(row=4, column=0, ipadx=20, pady=20)
 
     def open_file_dialog(self):
         file = filedialog.askopenfilename(

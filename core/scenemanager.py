@@ -1,3 +1,5 @@
+import tkinter as tk
+
 from pages.menu import Menu
 from pages.workpage import WorkPage
 from pages.credits import Credits
@@ -24,7 +26,7 @@ class SceneManager:
             self.scene.destroy()
 
         self.scene = scene
-        self.scene.pack()
+        self.scene.grid(row=0, column=0, sticky=tk.NSEW)
 
     def map_index_to_scene(self, index):
         if index == PAGES["MENU"]:

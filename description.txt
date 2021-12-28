@@ -8,10 +8,8 @@
         - mozna rozwijac, zwijac elemnty zestawienia
         - zaznaczajac element mozna go edytowac / usunac
 
-
     OTHERS
-        - automatyczny zapis do pliku po pelnym dodaniu kazdego elementu / modyfikacji / usunieci
-
+        - automatyczny zapis do pliku po pelnym dodaniu kazdego elementu / modyfikacji / usunieciu
 
 # OKNA
     - menu glowne

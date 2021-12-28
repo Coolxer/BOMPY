@@ -6,15 +6,15 @@ from config import PALETTE, FONTS
 
 
 class Button(tk.Button):
-    def __init__(self, window, text, type, action, arg=None):
+    def __init__(self, window, text, type, command, arg=None):
         super().__init__(window)
 
-        action_with_arg = partial(action, arg)
+        command_with_arg = partial(command, arg)
 
         if arg is not None:
-            act = action_with_arg
+            cmd = command_with_arg
         else:
-            act = action
+            cmd = command
 
         self["width"] = 20
         self["height"] = 3
@@ -22,4 +22,7 @@ class Button(tk.Button):
         self["foreground"] = PALETTE["BACKGROUND"]
         self["background"] = PALETTE[type]
         self["font"] = FONTS["COMPONENT"]
-        self["command"] = act
+        self["command"] = cmd
+
+    def set_state(self, state):
+        self["state"] = state

@@ -1,10 +1,6 @@
 {
+  "application": "bompy",
   "name": "sruba",
-  "identifier": "#01",
-  "quantity": 3,
-  "unit": "szt.",
-  "unit_cost": 2.5,
-  "total_cost": 7.5,
   "sub_parts": [
     {
       "name": "nakreta",

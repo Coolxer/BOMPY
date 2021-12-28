@@ -12,7 +12,7 @@ from components.button import Button
 from components.tree import Tree
 
 # to remove
-from filemanager import FileManager
+from core.filemanager import FileManager
 
 
 class WorkPage(tk.Frame):
@@ -21,14 +21,21 @@ class WorkPage(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent.window)
 
-        fileManager = FileManager(
+        self.configure(background=PALETTE["BACKGROUND"])
+
+        file_manager = FileManager(
             "F:/CURRENT/USLUGI_SIECIOWE_W_BIZNESIE/PRO/code/target_structure.json"
         )
 
-        data = fileManager.load_from_file()
+        data = file_manager.load_from_file()
+
+        PageHeader(self, text=f"Zestawienie BOM dla: {data['name']}").grid(
+            row=0, column=0, ipady=50
+        )
 
         self.columnconfigure(0, weight=1)
-        self.rowconfigure(0, weight=1)
+        self.rowconfigure([0, 1], weight=1)
 
+        # self.tree = Tree(self, data["sub_parts"])
         self.tree = Tree(self, data)
-        self.tree.grid(column=0, row=0, sticky=tk.NSEW)
+        self.tree.grid(row=1, column=0, sticky=tk.NSEW)

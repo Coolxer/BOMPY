@@ -14,36 +14,36 @@ class Credits(tk.Frame):
 
         self.configure(background=PALETTE["BACKGROUND"])
 
-        PageHeader(self, text="Informacje").grid(column=0, row=0, ipady=50)
+        PageHeader(self, text="Informacje").grid(row=0, column=0, ipady=50)
 
         SectionHeader(self, text="O aplikacji").grid(
-            column=0, row=1, pady=(20, 0)
+            row=1, column=0, pady=(20, 0)
         )
         NormalText(
             self,
             text="Aplikacja powstała w ramach projektu z przedmiotu 'Usługi sieciowe w biznesie'. Program umożliwia przegląd i modyfikację zestawień materiałowych BOM, ułatwiających funkcjonowanie przedsiębiorstw. Aplikacja posiada wygodny i intuicyjny interfejs użytkownika, system zapisywania i wczytywania zestawień, możliwość wygodnego przeglądania zestawień poprzez wykorzystanie hierachicznego drzewa widoku, a także przyjazny system tworzenia i edycji zestawień.",
-        ).grid(column=0, row=2)
+        ).grid(row=2, column=0)
 
         SectionHeader(self, text="O autorze").grid(
-            column=0, row=3, pady=(20, 0)
+            row=3, column=0, pady=(20, 0)
         )
         NormalText(self, text="Łukasz Miłoś, 4EF-ZI, 161883").grid(
-            column=0, row=4
+            row=4, column=0
         )
 
-        SectionHeader(self, text="Linki").grid(column=0, row=5, pady=(20, 0))
+        SectionHeader(self, text="Linki").grid(row=5, column=0, pady=(20, 0))
         NormalText(
             self, text="Kod źródłowy: https://github.com/Coolxer/BOMPY"
-        ).grid(column=0, row=6)
+        ).grid(row=6, column=0)
         NormalText(
             self,
             text="Dokumentacja projektowa: https://github.com/Coolxer/BOMDOC",
-        ).grid(column=0, row=7)
+        ).grid(row=7, column=0)
 
         Button(
             self,
             text="Powrót do menu",
             type="PRIMARY",
-            action=parent.switch_scene,
+            command=parent.switch_scene,
             arg=PAGES["MENU"],
-        ).grid(column=0, row=8, pady=50)
+        ).grid(row=8, column=0, pady=50)

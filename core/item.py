@@ -1,7 +1,7 @@
 import json
 
 
-class Element:
+class Item:
     name = ""
     identifier = ""
     quantity = 1

@@ -6,24 +6,30 @@ from components.tree_panel import TreePanel
 
 
 class Tree(ttk.Treeview):
+    panel = None
     data = {}
     idx = ""
+    first = True
 
     def __init__(self, window, data):
+        self.data = data
+        self.idx = ""
+
         self.configure_style()
-
         super().__init__(window, style="mystyle.Treeview")
-
         self["selectmode"] = "browse"  # can select only one item at a time
+
+        self.panel = TreePanel(window)
+        self.panel.grid(row=2, column=0, sticky=tk.S)
 
         self.prepare_columns()
         self.service_scrollbar(window)
 
-        self.bind("<<TreeviewOpen>>", self.handleOpenEvent)
+        # to double click on item
+        # self.bind("<<TreeviewOpen>>", self.handleOpenEvent)
+        self.bind("<<TreeviewSelect>>", self.handleSelectEvent)
 
-        self.pass_data(data)
-
-        TreePanel(window).grid(column=0, row=0, sticky=tk.S)
+        self.recursive(self.data)
 
     def configure_style(self):
         style = ttk.Style()
@@ -64,7 +70,6 @@ class Tree(ttk.Treeview):
 
     def prepare_columns(self):
         self["columns"] = (
-            "name",
             "identifier",
             "quantity",
             "unit",
@@ -75,42 +80,38 @@ class Tree(ttk.Treeview):
         for column in self["columns"]:
             self.column(column, anchor="center")
 
-        self.heading("name", text="Nazwa")
         self.heading("identifier", text="Identyfikator")
         self.heading("quantity", text="Ilość")
         self.heading("unit", text="Jednostka")
         self.heading("unit_cost", text="Cena jedn.")
         self.heading("total_cost", text="Suma")
 
-    def pass_data(self, data):
-        self.data = data
-        self.idx = ""
-        self.recursive(self.data)
+    def recursive(self, item):
+        if len(item["sub_parts"]):
+            if self.first == False:
+                self.write(item)
+                self.idx = item["name"]
 
-    def recursive(self, element):
-        if len(element["sub_parts"]):
-            self.write(element)
-
-            self.idx = element["name"]
-
-            for el in element["sub_parts"]:
+            for el in item["sub_parts"]:
                 self.recursive(el)
-        else:
-            self.write(element)
 
-    def write(self, element):
+            if self.first == True:
+                self.first = False
+        else:
+            self.write(item)
+
+    def write(self, item):
         self.insert(
             self.idx,
             "end",
-            element["name"],
-            text=element["name"],
+            item["name"],
+            text=item["name"],
             values=(
-                element["name"],
-                element["identifier"],
-                element["quantity"],
-                element["unit"],
-                element["unit_cost"],
-                element["total_cost"],
+                item["identifier"],
+                item["quantity"],
+                item["unit"],
+                item["unit_cost"],
+                item["total_cost"],
             ),
         )
 
@@ -124,6 +125,15 @@ class Tree(ttk.Treeview):
 
         self.configure(yscrollcommand=vsb.set)
 
+    # double click on item
     def handleOpenEvent(self, event):
         selected = self.focus()
         print(selected)
+
+    def handleSelectEvent(self, event):
+        selected = self.focus()
+
+        self.panel.set_item(self.data, selected)
+
+        for btn in self.panel.buttons:
+            btn.set_state(tk.NORMAL)

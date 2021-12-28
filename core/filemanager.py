@@ -14,13 +14,19 @@ class FileManager:
 
         file.close()
 
-        # if not self.valid_file(data):
-        #    return
+        if not self.valid_file(data):
+            print("invalid file")  # return
 
         return data
 
     def valid_file(self, data):
-        return 1
+        if "application" not in data or "name" not in data:
+            return False
+
+        elif data["application"] != "bompy":
+            return False
+
+        return True
 
     def save_to_file(self, data):
         file = open(self.path, "w+")
