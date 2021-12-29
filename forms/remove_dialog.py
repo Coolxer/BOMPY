@@ -33,8 +33,6 @@ class RemoveDialog(Modal):
         for el in item["sub_parts"]:
             result = self.recursive(el, index)
             if result >= 0:
-                print(item["sub_parts"])
-                print(result)
                 item["sub_parts"].pop(result)
                 break
 

@@ -102,11 +102,6 @@ class Tree(ttk.Treeview):
                 self.recursive(el, item["name"])
 
     def write(self, item):
-        print(
-            "##################################################################################"
-        )
-        print("")
-        print(item)
         self.insert(
             self.idx,
             "end",
