@@ -10,6 +10,7 @@ from components.normal_text import NormalText
 from components.button import Button
 
 from components.tree import Tree
+from components.tree_panel import TreePanel
 
 # to remove
 from core.file_manager import FileManager
@@ -33,9 +34,13 @@ class WorkPage(tk.Frame):
             row=0, column=0, ipady=30
         )
 
-        self.columnconfigure(0, weight=1)
         self.rowconfigure([0, 1], weight=1)
+        self.columnconfigure(0, weight=1)
 
+        panel = TreePanel(self, parent)
         # self.tree = Tree(self, data["sub_parts"])
-        self.tree = Tree(self, parent, data)
-        self.tree.grid(row=1, column=0, sticky=tk.NSEW)
+        tree = Tree(self, data, panel)
+        panel.set_refresh_callback(tree.draw_tree)
+
+        tree.grid(row=1, column=0, ipadx=20, ipady=20)
+        panel.grid(row=2, column=0, sticky=tk.S, ipady=30)

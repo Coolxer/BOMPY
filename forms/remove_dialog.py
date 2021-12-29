@@ -5,7 +5,7 @@ from forms.modal import Modal
 
 
 class RemoveDialog(Modal):
-    def __init__(self, window, data, item):
+    def __init__(self, window, data, item, callback):
         super().__init__(
             window=window,
             data=data,
@@ -16,8 +16,31 @@ class RemoveDialog(Modal):
             confirm_text="Usuń",
         )
 
+        self.data = data
+        self.name = item
+        self.callback = callback
+
     def confirm(self):
-        print("confirm remove")
+        self.recursive(self.data)
+        self.callback()
+        # print("confirm remove")
+
+    def recursive(self, item, index=0):
+        if item["name"] == self.name:
+            return index
+
+        index = 0
+        for el in item["sub_parts"]:
+            result = self.recursive(el, index)
+            if result >= 0:
+                print(item["sub_parts"])
+                print(result)
+                item["sub_parts"].pop(result)
+                break
+
+            index += 1
+
+        return -1
 
     def cancel(self):
         print("cancel remove")

@@ -26,36 +26,19 @@
           "unit": "szt.",
           "unit_cost": 2.5,
           "total_cost": 7.5,
-          "sub_parts": []
+          "sub_parts": [
+            {
+              "name": "ktosa",
+              "identifier": "#04",
+              "quantity": 3,
+              "unit": "szt.",
+              "unit_cost": 2.5,
+              "total_cost": 7.5,
+              "sub_parts": []
+            }
+          ]
         }
       ]
-    },
-    {
-      "name": "plyta",
-      "identifier": "#05",
-      "quantity": 3,
-      "unit": "szt.",
-      "unit_cost": 2.5,
-      "total_cost": 7.5,
-      "sub_parts": []
-    },
-    {
-      "name": "material",
-      "identifier": "#07",
-      "quantity": 3,
-      "unit": "szt.",
-      "unit_cost": 2.5,
-      "total_cost": 7.5,
-      "sub_parts": []
-    },
-    {
-      "name": "guma",
-      "identifier": "#08",
-      "quantity": 3,
-      "unit": "szt.",
-      "unit_cost": 2.5,
-      "total_cost": 7.5,
-      "sub_parts": []
     }
   ]
 }

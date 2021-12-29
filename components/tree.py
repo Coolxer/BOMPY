@@ -2,8 +2,6 @@ import tkinter as tk
 from tkinter import ttk
 from config import PALETTE, FONTS
 
-from components.tree_panel import TreePanel
-
 
 class Tree(ttk.Treeview):
     panel = None
@@ -11,16 +9,14 @@ class Tree(ttk.Treeview):
     idx = ""
     first = True
 
-    def __init__(self, window, scene_manager, data):
+    def __init__(self, window, data, panel):
         self.data = data
+        self.panel = panel
         self.idx = ""
 
         self.configure_style()
         super().__init__(window, style="mystyle.Treeview")
         self["selectmode"] = "browse"  # can select only one item at a time
-
-        self.panel = TreePanel(window, scene_manager)
-        self.panel.grid(row=2, column=0, sticky=tk.S)
 
         self.prepare_columns()
         self.service_scrollbar(window)
@@ -29,7 +25,7 @@ class Tree(ttk.Treeview):
         # self.bind("<<TreeviewOpen>>", self.handleOpenEvent)
         self.bind("<<TreeviewSelect>>", self.handleSelectEvent)
 
-        self.recursive(self.data)
+        self.draw_tree()
 
     def configure_style(self):
         style = ttk.Style()
@@ -78,7 +74,7 @@ class Tree(ttk.Treeview):
         )
 
         for column in self["columns"]:
-            self.column(column, anchor="center")
+            self.column(column, anchor="center", stretch=tk.YES, width=100)
 
         self.heading("identifier", text="Identyfikator")
         self.heading("quantity", text="Ilość")
@@ -86,21 +82,31 @@ class Tree(ttk.Treeview):
         self.heading("unit_cost", text="Cena jedn.")
         self.heading("total_cost", text="Suma")
 
-    def recursive(self, item):
-        if len(item["sub_parts"]):
-            if self.first == False:
-                self.write(item)
-                self.idx = item["name"]
+    def draw_tree(self):
+        self.first = True
+        self.delete(*self.get_children())
+        self.recursive(self.data)
+
+    def recursive(self, item, idx=""):
+        if self.first == True:
+            self.first = False
 
             for el in item["sub_parts"]:
                 self.recursive(el)
 
-            if self.first == True:
-                self.first = False
         else:
+            self.idx = idx
             self.write(item)
 
+            for el in item["sub_parts"]:
+                self.recursive(el, item["name"])
+
     def write(self, item):
+        print(
+            "##################################################################################"
+        )
+        print("")
+        print(item)
         self.insert(
             self.idx,
             "end",

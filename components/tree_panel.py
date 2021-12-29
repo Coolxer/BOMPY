@@ -79,6 +79,9 @@ class TreePanel(tk.PanedWindow):
 
         self.configure(background=PALETTE["BACKGROUND"])
 
+    def set_refresh_callback(self, callback):
+        self.refresh_callback = callback
+
     def set_item(self, data, item):
         self.data = data
         self.item = item
@@ -90,8 +93,10 @@ class TreePanel(tk.PanedWindow):
         # top = tk.Toplevel(master=self.window)
         # top.wm_attributes("-alpha", 0.8)
 
-        dialog = RemoveDialog(self.window, self.data, self.item)
         print(f"remove {self.item}")
+        dialog = RemoveDialog(
+            self.window, self.data, self.item, self.refresh_callback
+        )
 
     def edit_item(self):
         form = EditForm(self.window, self.data, self.item)
