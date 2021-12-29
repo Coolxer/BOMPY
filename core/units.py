@@ -1,4 +1,4 @@
-units = [
+UNITS = [
     'kg',
     'szt.'
     'm'

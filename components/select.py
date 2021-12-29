@@ -2,12 +2,13 @@ import tkinter as tk
 
 
 class Select(tk.OptionMenu):
-    current = StringVar()
+    value = None
 
     def __init__(self, window, values):
-        self.current(values[0])
+        self.value = tk.StringVar()
+        self.value.set(values[0])
 
-        super().__init__(window, self.current, values)
+        super().__init__(window, self.value, values)
 
     def get_value(self):
-        return self.current.get()
+        return self.value.get()
