@@ -73,7 +73,7 @@ class Modal(tk.Frame):
         self.frame.columnconfigure(columns, weight=1)
 
         header = SectionHeader(self.frame, message)
-        header["font"] = FONTS["NORMAL_TEXT"]
+        header["font"] = FONTS["COMPONENT"]
         header.grid(row=0, column=1, ipadx=5, ipady=5)
 
         self.confirm_btn = Button(
@@ -86,9 +86,7 @@ class Modal(tk.Frame):
 
         self.confirm_btn["width"] = self.cancel_btn["width"] = 8
         self.confirm_btn["height"] = self.cancel_btn["height"] = 2
-        self.confirm_btn["font"] = self.cancel_btn["font"] = FONTS[
-            "NORMAL_TEXT"
-        ]
+        self.confirm_btn["font"] = self.cancel_btn["font"] = FONTS["COMPONENT"]
 
         self.define_window_geometry(size[0], size[1])
 
