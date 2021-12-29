@@ -3,7 +3,7 @@ from tkinter import filedialog
 
 from config import PAGES, PALETTE, FONTS
 
-from core.filemanager import FileManager
+from core.file_manager import FileManager
 
 from components.page_header import PageHeader
 from components.button import Button
@@ -15,7 +15,10 @@ class Menu(tk.Frame):
 
         self.configure(background=PALETTE["BACKGROUND"])
 
-        PageHeader(self, text="MENU GŁÓWNE").grid(column=0, row=0, ipady=50)
+        self.rowconfigure([0, 1, 2, 3, 4], weight=1)
+        self.columnconfigure(0, weight=1)
+
+        PageHeader(self, text="MENU GŁÓWNE").grid(row=0, column=0, ipady=30)
 
         Button(
             self,

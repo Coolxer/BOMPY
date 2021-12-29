@@ -1,4 +1,4 @@
-from core.filemanager import FileManager
+from core.file_manager import FileManager
 
 
 file_manager = FileManager(

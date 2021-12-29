@@ -14,7 +14,10 @@ class Credits(tk.Frame):
 
         self.configure(background=PALETTE["BACKGROUND"])
 
-        PageHeader(self, text="Informacje").grid(row=0, column=0, ipady=50)
+        self.grid_rowconfigure([0, 1, 2, 3, 4], weight=1)
+        self.grid_columnconfigure([0], weight=1)
+
+        PageHeader(self, text="INFORMACJE").grid(row=0, column=0, ipady=30)
 
         SectionHeader(self, text="O aplikacji").grid(
             row=1, column=0, pady=(20, 0)

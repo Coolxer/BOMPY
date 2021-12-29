@@ -14,7 +14,7 @@ class Input(tk.Entry):
         max_length,
         placeholder=None,
     ):
-        super().__init__(window)
+        super().__init__(window, justify="center")
 
         self["width"] = 20
         # self["height"] = 3

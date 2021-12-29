@@ -1,11 +1,12 @@
 import tkinter as tk
 from tkinter import ttk
-from config import PALETTE, FONTS
+from config import PALETTE, FONTS, PAGES
 
 from components.button import Button
 
 from forms.remove_dialog import RemoveDialog
 from forms.edit_form import EditForm
+from forms.add_form import AddForm
 
 
 class TreePanelButton(Button):
@@ -20,14 +21,16 @@ class TreePanel(tk.PanedWindow):
     item = None
     buttons = []
     window = None
+    scene_manager = None
 
     data = {}
     item = None
 
-    def __init__(self, window):
+    def __init__(self, window, scene_manager):
 
         super().__init__(window)
         self.window = window
+        self.scene_manager = scene_manager
 
         self.buttons.append(
             TreePanelButton(
@@ -72,6 +75,8 @@ class TreePanel(tk.PanedWindow):
             btn.grid(row=0, column=col, padx=5, pady=5)
             col += 1
 
+        self.buttons[len(self.buttons) - 1].set_state(tk.NORMAL)
+
         self.configure(background=PALETTE["BACKGROUND"])
 
     def set_item(self, data, item):
@@ -93,7 +98,9 @@ class TreePanel(tk.PanedWindow):
         print(f"edit {self.item}")
 
     def add_item(self):
+        form = AddForm(self.window, self.data, self.item)
         print(f"add to: {self.item}")
 
     def back_to_menu(self):
         print("back to menu")
+        self.scene_manager.switch_scene(PAGES["MENU"])

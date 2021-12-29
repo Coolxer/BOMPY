@@ -1,5 +1,5 @@
 import nested_lookup as ns
-from core.filemanager import FileManager
+from core.file_manager import FileManager
 
 file_manager = FileManager(
     "F:/CURRENT/USLUGI_SIECIOWE_W_BIZNESIE/PRO/code/target_structure.json"

@@ -22,6 +22,8 @@ class ObjectForm(Modal):
             message=message,
             confirm_text=confirm_text,
             hide_buttons=True,
+            rows=[0, 1, 2, 3, 4, 5],
+            columns=[0, 1, 2],
         )
 
         self.create_widgets()
@@ -39,13 +41,16 @@ class ObjectForm(Modal):
             min_length=3,
             max_length=10,
         )
+
         self.identifier_input = Input(
             window=super().get_frame(),
             content_type="int",
             min_length=6,
             max_length=6,
         )
+
         self.unit_input = Select(window=super().get_frame(), values=UNITS)
+
         self.unit_cost_input = Input(
             window=super().get_frame(),
             content_type="float",
@@ -53,10 +58,12 @@ class ObjectForm(Modal):
             max_length=9,
         )
 
-        self.name_input.grid(row=0, column=0)
-        self.identifier_input.grid(row=1, column=0)
-        self.unit_input.grid(row=2, column=0)
-        self.unit_cost_input.grid(row=3, column=0)
+        self.name_input.grid(row=1, column=1)
+        self.identifier_input.grid(row=2, column=1)
+        self.unit_input.grid(row=3, column=1)
+        self.unit_cost_input.grid(row=4, column=1)
+
+        super().show_buttons((5, 0), (5, 2))
 
     def validate(self):
         if not self.name_input.validate():

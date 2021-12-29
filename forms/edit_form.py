@@ -12,7 +12,7 @@ class EditForm(ObjectForm):
             item=item,
             title="Edytowanie obiektu",
             size=(400, 400),
-            message="Trwa edycja obiektu",
+            message="Edytowanie obiektu",
             confirm_text="Zapisz",
         )
 

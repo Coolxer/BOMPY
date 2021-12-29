@@ -11,7 +11,7 @@ class Tree(ttk.Treeview):
     idx = ""
     first = True
 
-    def __init__(self, window, data):
+    def __init__(self, window, scene_manager, data):
         self.data = data
         self.idx = ""
 
@@ -19,7 +19,7 @@ class Tree(ttk.Treeview):
         super().__init__(window, style="mystyle.Treeview")
         self["selectmode"] = "browse"  # can select only one item at a time
 
-        self.panel = TreePanel(window)
+        self.panel = TreePanel(window, scene_manager)
         self.panel.grid(row=2, column=0, sticky=tk.S)
 
         self.prepare_columns()

@@ -12,7 +12,7 @@ from components.button import Button
 from components.tree import Tree
 
 # to remove
-from core.filemanager import FileManager
+from core.file_manager import FileManager
 
 
 class WorkPage(tk.Frame):
@@ -30,12 +30,12 @@ class WorkPage(tk.Frame):
         data = file_manager.load_from_file()
 
         PageHeader(self, text=f"Zestawienie BOM dla: {data['name']}").grid(
-            row=0, column=0, ipady=50
+            row=0, column=0, ipady=30
         )
 
         self.columnconfigure(0, weight=1)
         self.rowconfigure([0, 1], weight=1)
 
         # self.tree = Tree(self, data["sub_parts"])
-        self.tree = Tree(self, data)
+        self.tree = Tree(self, parent, data)
         self.tree.grid(row=1, column=0, sticky=tk.NSEW)

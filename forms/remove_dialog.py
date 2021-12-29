@@ -11,7 +11,7 @@ class RemoveDialog(Modal):
             data=data,
             item=item,
             title="Usuwanie obiektu",
-            size=(400, 100),
+            size=(500, 100),
             message="Czy jesteś pewien, że chcesz usunąć ten obiekt?",
             confirm_text="Usuń",
         )

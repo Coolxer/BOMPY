@@ -1,5 +1,1 @@
-UNITS = [
-    'kg',
-    'szt.'
-    'm'
-]
+UNITS = ["kg", "szt.", "m"]

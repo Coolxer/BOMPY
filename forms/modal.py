@@ -17,15 +17,19 @@ class Modal(tk.Frame):
         message,
         confirm_text,
         hide_buttons=False,
+        rows=[0, 1],
+        columns=[0, 1, 2],
     ):
         self.data = data
         self.item = item
 
         tk.Frame.__init__(self, window)
-        self.create_window(window, title, size, message, confirm_text)
+        self.create_window(
+            window, title, size, message, confirm_text, rows, columns
+        )
 
         if not hide_buttons:
-            self.show_buttons((1, 0), (1, 1))
+            self.show_buttons((1, 0), (1, 2))
 
     def confirm_action(self):
         self.confirm()
@@ -52,7 +56,9 @@ class Modal(tk.Frame):
             "%dx%d+%d+%d" % (window_width, window_height, x_pos, y_pos)
         )
 
-    def create_window(self, window, title, size, message, confirm_text):
+    def create_window(
+        self, window, title, size, message, confirm_text, rows, columns
+    ):
         self.frame = tk.Toplevel(window)
         self.frame.transient(window)
         self.frame.grab_set()
@@ -63,17 +69,12 @@ class Modal(tk.Frame):
         self.frame.maxsize(size[0], size[1])
         self.frame.config(bg=PALETTE["BACKGROUND"])
 
-        self.frame.columnconfigure([0, 1], weight=1)
-        self.frame.rowconfigure([0, 1], weight=1)
+        self.frame.rowconfigure(rows, weight=1)
+        self.frame.columnconfigure(columns, weight=1)
 
         header = SectionHeader(self.frame, message)
         header["font"] = FONTS["NORMAL_TEXT"]
-        self.frame.update_idletasks()
-        header.place(
-            x=self.frame.winfo_width() / 2,
-            y=self.frame.winfo_y() + 15,
-            anchor="center",
-        )
+        header.grid(row=0, column=1, ipadx=5, ipady=5)
 
         self.confirm_btn = Button(
             self.frame, confirm_text, "PRIMARY", command=self.confirm_action
@@ -83,16 +84,13 @@ class Modal(tk.Frame):
             self.frame, "Anuluj", "DANGER", command=self.cancel_action
         )
 
-        self.confirm_btn["width"] = self.cancel_btn["width"] = 5
+        self.confirm_btn["width"] = self.cancel_btn["width"] = 8
         self.confirm_btn["height"] = self.cancel_btn["height"] = 2
         self.confirm_btn["font"] = self.cancel_btn["font"] = FONTS[
             "NORMAL_TEXT"
         ]
 
         self.define_window_geometry(size[0], size[1])
-
-    def get_frame(self):
-        return self.frame
 
     def show_buttons(self, cf_btn_pos, cn_btn_pos):
         self.confirm_btn.grid(
@@ -109,3 +107,6 @@ class Modal(tk.Frame):
             padx=10,
             pady=10,
         )
+
+    def get_frame(self):
+        return self.frame

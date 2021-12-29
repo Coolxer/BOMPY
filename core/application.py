@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 
-from core.scenemanager import SceneManager
+from core.scene_manager import SceneManager
 from config import BASE_CONFIG, PAGES, PALETTE
 
 
@@ -30,6 +30,9 @@ class Application(tk.Tk):
             BASE_CONFIG["WINDOW"]["DEFAULT_WIDTH"],
             BASE_CONFIG["WINDOW"]["DEFAULT_HEIGHT"],
         )
+
+        self.grid_rowconfigure([0, 1, 2, 3, 4], weight=1)
+        self.grid_columnconfigure([0], weight=1)
 
         # create scene manager
         self.scene_manager = SceneManager(self)
