@@ -30,10 +30,10 @@ class Modal(tk.Frame):
 
         if not hide_buttons:
             self.show_buttons((1, 0), (1, 2))
-            
+
     def get_data(self):
         return self.data
-    
+
     def get_item_name(self):
         return self.item_name
 
@@ -111,6 +111,9 @@ class Modal(tk.Frame):
             padx=10,
             pady=10,
         )
+
+    def get_buttons(self):
+        return [self.confirm_btn, self.cancel_btn]
 
     def get_frame(self):
         return self.frame

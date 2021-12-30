@@ -3,8 +3,8 @@
   "name": "sruba",
   "sub_parts": [
     {
-      "name": "nakreta",
       "identifier": "#02",
+      "name": "nakreta",
       "quantity": 3,
       "unit": "szt.",
       "unit_cost": 2.5,
@@ -12,24 +12,24 @@
       "sub_parts": []
     },
     {
-      "name": "gwozdz",
       "identifier": "#03",
+      "name": "gwozdz",
       "quantity": 3,
       "unit": "szt.",
       "unit_cost": 2.5,
       "total_cost": 7.5,
       "sub_parts": [
         {
-          "name": "ktos",
-          "identifier": "#04",
+          "identifier": "#03",
+          "name": "gwozdz",
           "quantity": 3,
           "unit": "szt.",
           "unit_cost": 2.5,
           "total_cost": 7.5,
           "sub_parts": [
             {
+              "identifier": "#05",
               "name": "ktosa",
-              "identifier": "#04",
               "quantity": 3,
               "unit": "szt.",
               "unit_cost": 2.5,

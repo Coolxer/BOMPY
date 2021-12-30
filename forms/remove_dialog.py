@@ -19,16 +19,16 @@ class RemoveDialog(Modal):
         self.remove_callback = remove_callback
 
     def confirm(self):
-        self.recursive(super().get_data())
+        self.recursive_lookup(super().get_data())
         self.remove_callback()
 
-    def recursive(self, item, index=0):
+    def recursive_lookup(self, item, index=0):
         if item["name"] == super().get_item_name():
             return index
 
         index = 0
         for el in item["sub_parts"]:
-            result = self.recursive(el, index)
+            result = self.recursive_lookup(el, index)
             if result >= 0:
                 item["sub_parts"].pop(result)
                 break

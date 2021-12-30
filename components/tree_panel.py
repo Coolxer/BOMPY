@@ -93,18 +93,14 @@ class TreePanel(tk.PanedWindow):
 
     def add_item(self):
         form = AddForm(self.window, self.data, self.item)
-        print(f"add to: {self.item}")
 
     def remove_item(self):
-        print(f"remove {self.item}")
         dialog = RemoveDialog(
             self.window, self.data, self.item, self.refresh_callback
         )
 
     def edit_item(self):
         form = EditForm(self.window, self.data, self.item)
-        print(f"edit {self.item}")
 
     def back_to_menu(self):
-        print("back to menu")
         self.scene_manager.switch_scene(PAGES["MENU"])
