@@ -29,6 +29,8 @@ class TreePanel(tk.PanedWindow):
         self.window = window
         self.scene_manager = scene_manager
 
+        self.buttons = []
+
         self.buttons.append(
             TreePanelButton(
                 self,

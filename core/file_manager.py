@@ -15,7 +15,7 @@ class FileManager:
         file.close()
 
         if not self.valid_file(data):
-            print("invalid file")  # return
+            return None
 
         return data
 

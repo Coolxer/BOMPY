@@ -7,7 +7,13 @@ from components.button import Button
 
 class MessageBox(Modal):
     def __init__(
-        self, window, title, size, message, confirm_callback, confirm_args=None
+        self,
+        window,
+        title,
+        size,
+        message,
+        confirm_callback=None,
+        confirm_args=None,
     ):
         super().__init__(
             window=window,
@@ -31,4 +37,5 @@ class MessageBox(Modal):
         )
 
     def confirm(self):
-        self.confirm_callback(self.confirm_args)
+        if self.confirm_callback is not None:
+            self.confirm_callback(self.confirm_args)

@@ -8,11 +8,14 @@ from core.file_manager import FileManager
 from components.page_header import PageHeader
 from components.button import Button
 
+from forms.message_box import MessageBox
+
 
 class Menu(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent.window)
 
+        self.parent = parent
         self.configure(background=PALETTE["BACKGROUND"])
 
         self.rowconfigure([0, 1, 2, 3, 4], weight=1)
@@ -55,7 +58,17 @@ class Menu(tk.Frame):
             filetypes=(("Bompy file", "*.json"),),
         )
 
-        if file is None:
-            return
+        if file is not None:
+            file_manager = FileManager(file)
 
-        file_manager = FileManager(file)
+            data = file_manager.load_from_file()
+
+            if data is None:
+                MessageBox(
+                    self,
+                    "Błąd pliku",
+                    (500, 100),
+                    "Plik niezgodny z aplikacją",
+                )
+            else:
+                self.parent.switch_scene(PAGES["WORKPAGE"])
