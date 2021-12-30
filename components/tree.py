@@ -2,30 +2,29 @@ import tkinter as tk
 from tkinter import ttk
 from config import PALETTE, FONTS
 
+from components.section_header import SectionHeader
+
 
 class Tree(ttk.Treeview):
-    panel = None
-    data = {}
-    idx = ""
-    first = True
+    message = None
 
     def __init__(self, window, data, panel):
+        self.window = window
         self.data = data
         self.panel = panel
-        self.idx = ""
+        self.parent_index = ""
+        self.first_iteration = True
 
         self.configure_style()
         super().__init__(window, style="mystyle.Treeview")
-        self["selectmode"] = "browse"  # can select only one item at a time
 
+        self["selectmode"] = "browse"  # can select only one item at a time
         self.prepare_columns()
         self.service_scrollbar(window)
 
-        # to double click on item
-        # self.bind("<<TreeviewOpen>>", self.handleOpenEvent)
         self.bind("<<TreeviewSelect>>", self.handleSelectEvent)
 
-        self.draw_tree()
+        self.draw()
 
     def configure_style(self):
         style = ttk.Style()
@@ -82,28 +81,9 @@ class Tree(ttk.Treeview):
         self.heading("unit_cost", text="Cena jedn.")
         self.heading("total_cost", text="Suma")
 
-    def draw_tree(self):
-        self.first = True
-        self.delete(*self.get_children())
-        self.recursive(self.data)
-
-    def recursive(self, item, idx=""):
-        if self.first == True:
-            self.first = False
-
-            for el in item["sub_parts"]:
-                self.recursive(el)
-
-        else:
-            self.idx = idx
-            self.write(item)
-
-            for el in item["sub_parts"]:
-                self.recursive(el, item["name"])
-
-    def write(self, item):
+    def add_item(self, item):
         self.insert(
-            self.idx,
+            self.parent_index,
             "end",
             item["name"],
             text=item["name"],
@@ -114,7 +94,41 @@ class Tree(ttk.Treeview):
                 item["unit_cost"],
                 item["total_cost"],
             ),
+            open=True,
         )
+
+    def build(self, item, parent_index=""):
+        if self.first_iteration == True:
+            self.first_iteration = False
+
+            for el in item["sub_parts"]:
+                self.build(el)
+
+        else:
+            self.parent_index = parent_index
+            self.add_item(item)
+
+            for el in item["sub_parts"]:
+                self.build(el, item["name"])
+
+    def draw(self):
+        self.first_iteration = True
+        self.delete(*self.get_all_children())
+        self.build(self.data)
+
+        if len(self.get_all_children()) == 0:
+            self.grid_forget()
+            self.panel.modify_panel(expand=False)
+            self.message = SectionHeader(
+                self.window, "Brak elementów zestawienia"
+            )
+            self.message.grid(row=1, column=0, ipadx=20, ipady=20)
+        else:
+            self.grid()
+            self["height"] = len(self.get_all_children()) - 1
+            self.panel.modify_panel(expand=True)
+            if self.message is not None:
+                self.message.grid_forget()
 
     def service_scrollbar(self, window):
         window.update_idletasks()  # potrzebne zeby sie dobrze pokazywala szerokosc
@@ -126,11 +140,6 @@ class Tree(ttk.Treeview):
 
         self.configure(yscrollcommand=vsb.set)
 
-    # double click on item
-    def handleOpenEvent(self, event):
-        selected = self.focus()
-        print(selected)
-
     def handleSelectEvent(self, event):
         selected = self.focus()
 
@@ -138,3 +147,9 @@ class Tree(ttk.Treeview):
 
         for btn in self.panel.buttons:
             btn.set_state(tk.NORMAL)
+
+    def get_all_children(self, item=""):
+        children = self.get_children(item)
+        for child in children:
+            children += self.get_all_children(child)
+        return children

@@ -38,9 +38,9 @@ class WorkPage(tk.Frame):
         self.columnconfigure(0, weight=1)
 
         panel = TreePanel(self, parent)
-        # self.tree = Tree(self, data["sub_parts"])
         tree = Tree(self, data, panel)
-        panel.set_refresh_callback(tree.draw_tree)
+
+        panel.set_refresh_callback(tree.draw)
 
         tree.grid(row=1, column=0, ipadx=20, ipady=20)
         panel.grid(row=2, column=0, sticky=tk.S, ipady=30)

@@ -5,28 +5,25 @@ from forms.modal import Modal
 
 
 class RemoveDialog(Modal):
-    def __init__(self, window, data, item, callback):
+    def __init__(self, window, data, item_name, remove_callback):
         super().__init__(
             window=window,
             data=data,
-            item=item,
+            item_name=item_name,
             title="Usuwanie obiektu",
             size=(500, 100),
             message="Czy chcesz usunąć ten obiekt?",
             confirm_text="Usuń",
         )
 
-        self.data = data
-        self.name = item
-        self.callback = callback
+        self.remove_callback = remove_callback
 
     def confirm(self):
-        self.recursive(self.data)
-        self.callback()
-        # print("confirm remove")
+        self.recursive(super().get_data())
+        self.remove_callback()
 
     def recursive(self, item, index=0):
-        if item["name"] == self.name:
+        if item["name"] == super().get_item_name():
             return index
 
         index = 0
@@ -39,6 +36,3 @@ class RemoveDialog(Modal):
             index += 1
 
         return -1
-
-    def cancel(self):
-        print("cancel remove")

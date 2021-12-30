@@ -20,9 +20,6 @@ class TreePanelButton(Button):
 class TreePanel(tk.PanedWindow):
     item = None
     buttons = []
-    window = None
-    scene_manager = None
-
     data = {}
     item = None
 
@@ -35,9 +32,9 @@ class TreePanel(tk.PanedWindow):
         self.buttons.append(
             TreePanelButton(
                 self,
-                text="Usuń",
+                text="Dodaj",
                 type="PRIMARY",
-                command=self.remove_item,
+                command=self.add_item,
             )
         )
 
@@ -53,9 +50,9 @@ class TreePanel(tk.PanedWindow):
         self.buttons.append(
             TreePanelButton(
                 self,
-                text="Dodaj",
+                text="Usuń",
                 type="PRIMARY",
-                command=self.add_item,
+                command=self.remove_item,
             )
         )
 
@@ -79,20 +76,26 @@ class TreePanel(tk.PanedWindow):
 
         self.configure(background=PALETTE["BACKGROUND"])
 
-    def set_refresh_callback(self, callback):
-        self.refresh_callback = callback
+    def set_refresh_callback(self, refresh_callback):
+        self.refresh_callback = refresh_callback
 
     def set_item(self, data, item):
         self.data = data
         self.item = item
 
+    def modify_panel(self, expand):
+        if expand == False:
+            self.buttons[1].grid_forget()
+            self.buttons[2].grid_forget()
+        else:
+            self.buttons[1].grid()
+            self.buttons[2].grid()
+
+    def add_item(self):
+        form = AddForm(self.window, self.data, self.item)
+        print(f"add to: {self.item}")
+
     def remove_item(self):
-        # self.window.attributes("-alpha", 0.3)
-        # self.window.wm_attributes("-alpha", 0.3)
-
-        # top = tk.Toplevel(master=self.window)
-        # top.wm_attributes("-alpha", 0.8)
-
         print(f"remove {self.item}")
         dialog = RemoveDialog(
             self.window, self.data, self.item, self.refresh_callback
@@ -101,10 +104,6 @@ class TreePanel(tk.PanedWindow):
     def edit_item(self):
         form = EditForm(self.window, self.data, self.item)
         print(f"edit {self.item}")
-
-    def add_item(self):
-        form = AddForm(self.window, self.data, self.item)
-        print(f"add to: {self.item}")
 
     def back_to_menu(self):
         print("back to menu")

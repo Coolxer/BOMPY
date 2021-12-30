@@ -3,7 +3,7 @@ BASE_CONFIG = {
     "AUTHOR": "LUKASZ MILOS",
     "VERSION": "1.0.0",
     "WINDOW": {
-        "MIN_WIDTH": 350,
+        "MIN_WIDTH": 500,
         "MIN_HEIGHT": 500,
         "DEFAULT_WIDTH": 1024,
         "DEFAULT_HEIGHT": 800,
