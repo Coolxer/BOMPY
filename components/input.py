@@ -21,7 +21,7 @@ class Input(tk.Entry):
         self["text"] = placeholder
         self["foreground"] = PALETTE["PRIMARY"]
         self["background"] = PALETTE["BACKGROUND"]
-        self["font"] = FONTS["COMPONENT"]
+        self["font"] = FONTS["NORMAL_TEXT"]
 
         self.min_length = min_length
         self.max_length = max_length

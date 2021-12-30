@@ -11,7 +11,7 @@ class EditForm(ObjectForm):
             data=data,
             item_name=item_name,
             title="Edytowanie obiektu",
-            size=(400, 400),
+            size=(600, 400),
             message="Edytowanie obiektu",
             confirm_text="Zapisz",
         )

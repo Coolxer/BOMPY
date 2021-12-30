@@ -11,7 +11,7 @@ class AddForm(ObjectForm):
             data=data,
             item_name=item_name,
             title="Dodawanie obiektu",
-            size=(400, 400),
+            size=(600, 400),
             message="Dodawanie obiektu",
             confirm_text="Dodaj",
         )

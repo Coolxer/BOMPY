@@ -18,7 +18,7 @@ class Modal(tk.Frame):
         confirm_text,
         hide_buttons=False,
         rows=[0, 1],
-        columns=[0, 1, 2],
+        columns=[0, 1, 2, 3, 4],
     ):
         self.data = data
         self.item_name = item_name
@@ -29,7 +29,7 @@ class Modal(tk.Frame):
         )
 
         if not hide_buttons:
-            self.show_buttons((1, 0), (1, 2))
+            self.show_buttons((1, 0), (1, 4))
 
     def get_data(self):
         return self.data
@@ -80,7 +80,7 @@ class Modal(tk.Frame):
 
         header = SectionHeader(self.frame, message)
         header["font"] = FONTS["COMPONENT"]
-        header.grid(row=0, column=1, ipadx=5, ipady=5)
+        header.grid(row=0, column=2, ipadx=5, ipady=5)
 
         self.confirm_btn = Button(
             self.frame, confirm_text, "PRIMARY", command=self.confirm_action

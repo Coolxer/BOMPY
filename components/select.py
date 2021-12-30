@@ -16,7 +16,7 @@ class Select(tk.OptionMenu):
         # self["height"] = 2
         self["foreground"] = PALETTE["PRIMARY"]
         self["background"] = PALETTE["BACKGROUND"]
-        self["font"] = FONTS["COMPONENT"]
+        self["font"] = FONTS["NORMAL_TEXT"]
 
         self["activebackground"] = PALETTE["PRIMARY"]
         self["activeforeground"] = PALETTE["BACKGROUND"]

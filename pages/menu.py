@@ -8,6 +8,7 @@ from core.file_manager import FileManager
 from components.page_header import PageHeader
 from components.button import Button
 
+from forms.create_form import CreateForm
 from forms.message_box import MessageBox
 
 
@@ -27,7 +28,7 @@ class Menu(tk.Frame):
             self,
             text="Utwórz zestawienie (BOM)",
             type="PRIMARY",
-            command=self.open_file_dialog,
+            command=self.create_bom,
         ).grid(row=1, column=0, ipadx=20, pady=20)
 
         Button(
@@ -51,6 +52,9 @@ class Menu(tk.Frame):
             "DANGER",
             command=parent.window.destroy,
         ).grid(row=4, column=0, ipadx=20, pady=20)
+
+    def create_bom(self):
+        create_form = CreateForm(self)
 
     def open_file_dialog(self):
         file = filedialog.askopenfilename(
