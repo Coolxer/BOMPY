@@ -5,6 +5,8 @@ from config import PALETTE, FONTS, PAGES
 from components.section_header import SectionHeader
 from forms.message_box import MessageBox
 
+MAX_DISPLAYING_ITEMS = 10
+
 
 class Tree(ttk.Treeview):
     empty_message = None
@@ -136,7 +138,13 @@ class Tree(ttk.Treeview):
             self.empty_message.grid(row=1, column=0, ipadx=20, ipady=20)
         else:
             self.grid()
-            self["height"] = len(self.get_all_children()) - 1
+            items = len(self.get_all_children()) - 1
+
+            if items < MAX_DISPLAYING_ITEMS:
+                self["height"] = items
+            else:
+                self["height"] = MAX_DISPLAYING_ITEMS
+
             self.panel.modify_panel(expand=True)
             if self.empty_message is not None:
                 self.empty_message.grid_forget()
@@ -144,12 +152,10 @@ class Tree(ttk.Treeview):
     def service_scrollbar(self, window):
         window.update_idletasks()  # potrzebne zeby sie dobrze pokazywala szerokosc
 
-        vsb = ttk.Scrollbar(window, orient="vertical", command=self.yview)
-        vsb.place(
-            x=(window.winfo_width() - 15), y=30, height=window.winfo_height()
-        )
+        scrollbar = ttk.Scrollbar(window, orient="vertical", command=self.yview)
+        scrollbar.grid(row=1, column=2, sticky=tk.NSEW, padx=30)
 
-        self.configure(yscrollcommand=vsb.set)
+        self.configure(yscrollcommand=scrollbar.set)
 
     def handleSelectEvent(self, event):
         selected = self.focus()

@@ -25,7 +25,7 @@ class WorkPage(tk.Frame):
         self.configure(background=PALETTE["BACKGROUND"])
 
         file_manager = FileManager(
-            "F:/CURRENT/USLUGI_SIECIOWE_W_BIZNESIE/PRO/code/target_structure.json"
+            "F:/CURRENT/USLUGI_SIECIOWE_W_BIZNESIE/PRO/code/data.json"
         )
 
         data = file_manager.load_from_file()
@@ -43,4 +43,4 @@ class WorkPage(tk.Frame):
         panel.set_refresh_callback(tree.draw)
 
         tree.grid(row=1, column=0, ipadx=20, ipady=20)
-        panel.grid(row=2, column=0, sticky=tk.S, ipady=30)
+        panel.grid(row=2, column=0, sticky=tk.S, pady=30)
