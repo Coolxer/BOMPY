@@ -1,7 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import filedialog
 
-from config import PALETTE, FONTS
+from config import PAGES, PALETTE, FONTS
 
 from components.normal_text import NormalText
 from components.section_header import SectionHeader
@@ -9,10 +10,11 @@ from components.button import Button
 from components.input import Input
 
 from forms.modal import Modal
+from forms.message_box import MessageBox
 
 
 class CreateForm(Modal):
-    def __init__(self, window):
+    def __init__(self, window, scene_manager):
         super().__init__(
             window=window,
             data={},
@@ -27,6 +29,7 @@ class CreateForm(Modal):
             columns=[0, 1, 2, 3],
         )
 
+        self.scene_manager = scene_manager
         self.create_widgets()
 
     def confirm(self):
@@ -41,6 +44,8 @@ class CreateForm(Modal):
             )
         else:
             super().get_frame().destroy()
+            self.open_file_dialog()
+            self.scene_manager.switch_scene(PAGES["WORKPAGE"])
 
     def create_widgets(self):
         self.name_label = NormalText(window=super().get_frame(), text="Nazwa")
@@ -56,3 +61,14 @@ class CreateForm(Modal):
         self.name_input.grid(row=1, column=2)
 
         super().show_buttons((2, 0), (2, 3))
+
+    def open_file_dialog(self):
+        file = filedialog.asksaveasfilename()(
+            title="Wybierz lokalizację pliku zestawienia",
+            filetypes=(("Bompy file", "*.json"),),
+            defaultextension="*.json",
+        )
+
+        file_manager = FileManager(file)
+
+        data = {}

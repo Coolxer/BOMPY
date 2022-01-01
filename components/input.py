@@ -29,13 +29,22 @@ class Input(tk.Entry):
         self.min_length = min_length
         self.max_length = max_length
 
+    def characters_string(self, length):
+        if length <= 1:
+            return "znak"
+        elif length <= 4:
+            return "znaki"
+        else:
+            return "znaków"
+
     def validate(self):
         value = self.get_value()
+        length = len(value)
 
-        if self.min_length is not None and len(value) < self.min_length:
-            return f"{self.input_name} musi mieć co najmniej {self.min_length} znaków długości"
-        elif self.max_length is not None and len(value) > self.max_length:
-            return f"{self.input_name} może mieć maksymalnie {self.max_length} znaków długości"
+        if self.min_length is not None and length < self.min_length:
+            return f"{self.input_name} musi mieć co najmniej {self.min_length} {self.characters_string(self.min_length)} długości"
+        elif self.max_length is not None and length > self.max_length:
+            return f"{self.input_name} może mieć maksymalnie {self.max_length} {self.characters_string(self.max_length)} długości"
         else:
             if self.content_type == "string":
                 return ""

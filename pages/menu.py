@@ -54,7 +54,7 @@ class Menu(tk.Frame):
         ).grid(row=4, column=0, ipadx=20, pady=20)
 
     def create_bom(self):
-        create_form = CreateForm(self)
+        create_form = CreateForm(self, self.parent)
 
     def open_file_dialog(self):
         file = filedialog.askopenfilename(
