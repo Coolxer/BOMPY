@@ -38,17 +38,6 @@ class ObjectForm(Modal):
         name_output = self.name_input.validate()
         unit_cost_output = self.unit_cost_input.validate()
 
-        """
-        if len(identifier_output):
-            print(identifier_output)
-        elif len(name_output):
-            print(name_output)
-        elif len(unit_cost_output):
-            print(unit_cost_output)
-        else:
-            super().get_frame().destroy()
-        """
-
         if len(identifier_output) or len(name_output) or len(unit_cost_output):
             msg = ""
             if len(identifier_output):
@@ -88,7 +77,7 @@ class ObjectForm(Modal):
             window=super().get_frame(),
             input_name="Identyfikator",
             content_type="int",
-            min_length=3,
+            min_length=6,
             max_length=6,
         )
         self.name_input = Input(
