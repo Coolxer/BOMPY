@@ -42,5 +42,7 @@ class WorkPage(tk.Frame):
 
         panel.set_refresh_callback(tree.draw)
 
-        tree.grid(row=1, column=0, ipadx=20, ipady=20)
+        if not tree.is_empty():
+            tree.grid(row=1, column=0, ipadx=20, ipady=20)
+
         panel.grid(row=2, column=0, sticky=tk.S, pady=30)

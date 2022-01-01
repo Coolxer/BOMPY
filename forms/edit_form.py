@@ -15,9 +15,3 @@ class EditForm(ObjectForm):
             message="Edytowanie obiektu",
             confirm_text="Zapisz",
         )
-
-    def confirm(self):
-        print("confirm edit")
-
-    def cancel(self):
-        print("cancel edit")

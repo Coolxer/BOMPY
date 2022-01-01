@@ -16,12 +16,14 @@ class Modal(tk.Frame):
         size,
         message,
         confirm_text,
+        confirm_auto_destroy=True,
         hide_buttons=False,
         rows=[0, 1],
         columns=[0, 1, 2, 3, 4],
     ):
         self.data = data
         self.item_name = item_name
+        self.confirm_auto_destroy = confirm_auto_destroy
 
         tk.Frame.__init__(self, window)
         self.create_window(
@@ -39,7 +41,11 @@ class Modal(tk.Frame):
 
     def confirm_action(self):
         self.confirm()
-        self.frame.destroy()
+        if (
+            self.confirm_auto_destroy is not None
+            and self.confirm_auto_destroy == True
+        ):
+            self.frame.destroy()
 
     def cancel_action(self):
         self.cancel()
@@ -79,7 +85,7 @@ class Modal(tk.Frame):
         self.frame.columnconfigure(columns, weight=1)
 
         header = SectionHeader(self.frame, message)
-        header["font"] = FONTS["COMPONENT"]
+        header["font"] = FONTS["NORMAL_TEXT"]
         header.grid(row=0, column=2, ipadx=5, ipady=5)
 
         self.confirm_btn = Button(

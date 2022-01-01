@@ -62,7 +62,7 @@ class Menu(tk.Frame):
             filetypes=(("Bompy file", "*.json"),),
         )
 
-        if file is not None:
+        try:
             file_manager = FileManager(file)
 
             data = file_manager.load_from_file()
@@ -76,3 +76,5 @@ class Menu(tk.Frame):
                 )
             else:
                 self.parent.switch_scene(PAGES["WORKPAGE"])
+        except:
+            pass

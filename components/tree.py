@@ -9,6 +9,7 @@ MAX_DISPLAYING_ITEMS = 10
 
 
 class Tree(ttk.Treeview):
+    scrollbar = None
     empty_message = None
 
     def __init__(self, window, data, panel):
@@ -129,15 +130,19 @@ class Tree(ttk.Treeview):
         self.delete(*self.get_all_children())
         self.build(self.data)
 
-        if len(self.get_all_children()) == 0:
+        if self.is_empty():
             self.grid_forget()
+            self.scrollbar.grid_forget()
+
             self.panel.modify_panel(expand=False)
             self.empty_message = SectionHeader(
                 self.window, "Brak elementów zestawienia"
             )
             self.empty_message.grid(row=1, column=0, ipadx=20, ipady=20)
+            self.panel.buttons[0].set_state(tk.NORMAL)
         else:
             self.grid()
+            self.scrollbar.grid()
             items = len(self.get_all_children()) - 1
 
             if items < MAX_DISPLAYING_ITEMS:
@@ -152,10 +157,12 @@ class Tree(ttk.Treeview):
     def service_scrollbar(self, window):
         window.update_idletasks()  # potrzebne zeby sie dobrze pokazywala szerokosc
 
-        scrollbar = ttk.Scrollbar(window, orient="vertical", command=self.yview)
-        scrollbar.grid(row=1, column=2, sticky=tk.NSEW, padx=30)
+        self.scrollbar = ttk.Scrollbar(
+            window, orient="vertical", command=self.yview
+        )
+        self.scrollbar.grid(row=1, column=2, sticky=tk.NSEW, padx=30)
 
-        self.configure(yscrollcommand=scrollbar.set)
+        self.configure(yscrollcommand=self.scrollbar.set)
 
     def handleSelectEvent(self, event):
         selected = self.focus()
@@ -170,3 +177,6 @@ class Tree(ttk.Treeview):
         for child in children:
             children += self.get_all_children(child)
         return children
+
+    def is_empty(self):
+        return len(self.get_all_children()) == 0

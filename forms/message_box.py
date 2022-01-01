@@ -3,6 +3,7 @@ from tkinter import ttk
 
 from forms.modal import Modal
 from components.button import Button
+from config import FONTS
 
 
 class MessageBox(Modal):
