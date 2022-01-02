@@ -2,14 +2,13 @@ import tkinter as tk
 from tkinter import ttk
 
 from forms.modal import Modal
+import core.store as store
 
 
 class RemoveDialog(Modal):
-    def __init__(self, window, data, item_name, remove_callback):
+    def __init__(self, window, remove_callback):
         super().__init__(
             window=window,
-            data=data,
-            item_name=item_name,
             title="Usuwanie obiektu",
             size=(500, 100),
             message="Czy chcesz usunąć ten obiekt?",
@@ -19,11 +18,11 @@ class RemoveDialog(Modal):
         self.remove_callback = remove_callback
 
     def confirm(self):
-        self.recursive_lookup(super().get_data())
+        self.recursive_lookup(store.instance.get_data())
         self.remove_callback()
 
     def recursive_lookup(self, item, index=0):
-        if item["name"] == super().get_item_name():
+        if item["name"] == store.instance.get_item():
             return index
 
         index = 0

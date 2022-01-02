@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
+
 from config import PALETTE, FONTS, PAGES
+import core.store as store
 
 from components.section_header import SectionHeader
 from forms.message_box import MessageBox
@@ -12,9 +14,8 @@ class Tree(ttk.Treeview):
     scrollbar = None
     empty_message = None
 
-    def __init__(self, window, data, panel):
+    def __init__(self, window, panel):
         self.window = window
-        self.data = data
         self.panel = panel
         self.parent_id = ""
         self.first_iteration = True
@@ -128,7 +129,7 @@ class Tree(ttk.Treeview):
     def draw(self):
         self.first_iteration = True
         self.delete(*self.get_all_children())
-        self.build(self.data)
+        self.build(store.instance.get_data())
 
         if self.is_empty():
             self.grid_forget()
@@ -167,7 +168,7 @@ class Tree(ttk.Treeview):
     def handleSelectEvent(self, event):
         selected = self.focus()
 
-        self.panel.set_item(self.data, selected)
+        store.instance.set_item(selected)
 
         for btn in self.panel.buttons:
             btn.set_state(tk.NORMAL)

@@ -18,8 +18,6 @@ class MessageBox(Modal):
     ):
         super().__init__(
             window=window,
-            data={},
-            item_name={},
             title=title,
             size=size,
             message=message,

@@ -7,19 +7,19 @@ class FileManager:
     def __init__(self, path):
         self.path = path
 
-    def load_from_file(self):
+    def load(self):
         file = open(self.path, "r")
 
         data = json.load(file)
 
         file.close()
 
-        if not self.valid_file(data):
+        if not self.validate(data):
             return None
 
         return data
 
-    def valid_file(self, data):
+    def validate(self, data):
         if "application" not in data or "name" not in data:
             return False
 
@@ -28,7 +28,7 @@ class FileManager:
 
         return True
 
-    def save_to_file(self, data):
+    def save(self, data):
         file = open(self.path, "w+")
         file.write(data)
         file.close()

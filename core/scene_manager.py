@@ -13,11 +13,7 @@ class SceneManager:
 
     def __init__(self, window):
         self.window = window
-
-        # UNCOMMENT LATER
         self.switch_scene(PAGES["MENU"])
-
-        # self.switch_scene(PAGES["WORKPAGE"])
 
     def switch_scene(self, scene_index):
         scene = self.map_index_to_scene(scene_index)
@@ -30,10 +26,10 @@ class SceneManager:
 
     def map_index_to_scene(self, index):
         if index == PAGES["MENU"]:
-            return Menu(self)
+            return Menu(self.window)
         elif index == PAGES["WORKPAGE"]:
-            return WorkPage(self)
+            return WorkPage(self.window)
         elif index == PAGES["CREDITS"]:
-            return Credits(self)
+            return Credits(self.window)
 
         return None

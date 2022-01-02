@@ -1,7 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 
-from core.scene_manager import SceneManager
+import core.store as store
+
 from config import BASE_CONFIG, PAGES, PALETTE
 
 
@@ -34,8 +35,7 @@ class Application(tk.Tk):
         self.grid_rowconfigure([0, 1, 2, 3, 4], weight=1)
         self.grid_columnconfigure([0], weight=1)
 
-        # create scene manager
-        self.scene_manager = SceneManager(self)
+        store.instance.set_scene_manager(self)
 
     def define_window_geometry(self, window_width, window_height):
         screen_width = self.winfo_screenwidth()

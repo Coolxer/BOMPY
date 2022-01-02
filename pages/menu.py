@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import filedialog
 
 from config import PAGES, PALETTE, FONTS
+import core.store as store
 
 from core.file_manager import FileManager
 
@@ -13,10 +14,9 @@ from forms.message_box import MessageBox
 
 
 class Menu(tk.Frame):
-    def __init__(self, parent):
-        tk.Frame.__init__(self, parent.window)
+    def __init__(self, window):
+        tk.Frame.__init__(self, window)
 
-        self.parent = parent
         self.configure(background=PALETTE["BACKGROUND"])
 
         self.rowconfigure([0, 1, 2, 3, 4], weight=1)
@@ -42,7 +42,7 @@ class Menu(tk.Frame):
             self,
             "Informacje",
             "PRIMARY",
-            command=parent.switch_scene,
+            command=store.instance.call_switch_scene,
             arg=PAGES["CREDITS"],
         ).grid(row=3, column=0, ipadx=20, pady=20)
 
@@ -50,11 +50,11 @@ class Menu(tk.Frame):
             self,
             "Wyjście",
             "DANGER",
-            command=parent.window.destroy,
+            command=window.destroy,
         ).grid(row=4, column=0, ipadx=20, pady=20)
 
     def create_bom(self):
-        create_form = CreateForm(self, self.parent)
+        create_form = CreateForm(self)
 
     def open_file_dialog(self):
         file = filedialog.askopenfilename(
@@ -65,7 +65,7 @@ class Menu(tk.Frame):
         try:
             file_manager = FileManager(file)
 
-            data = file_manager.load_from_file()
+            data = file_manager.load()
 
             if data is None:
                 MessageBox(
@@ -75,6 +75,7 @@ class Menu(tk.Frame):
                     "Plik niezgodny z aplikacją",
                 )
             else:
-                self.parent.switch_scene(PAGES["WORKPAGE"])
+                store.instance.set_data(data)
+                store.instance.call_switch_scene(PAGES["WORKPAGE"])
         except:
             pass

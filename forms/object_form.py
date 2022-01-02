@@ -14,13 +14,9 @@ from forms.message_box import MessageBox
 
 
 class ObjectForm(Modal):
-    def __init__(
-        self, window, data, item_name, title, size, message, confirm_text
-    ):
+    def __init__(self, window, title, size, message, confirm_text):
         super().__init__(
             window=window,
-            data=data,
-            item_name=item_name,
             title=title,
             size=size,
             message=message,

@@ -1,6 +1,7 @@
 import tkinter as tk
 
 from config import PAGES, PALETTE
+import core.store as store
 
 from components.page_header import PageHeader
 from components.section_header import SectionHeader
@@ -9,8 +10,8 @@ from components.button import Button
 
 
 class Credits(tk.Frame):
-    def __init__(self, parent):
-        tk.Frame.__init__(self, parent.window)
+    def __init__(self, window):
+        tk.Frame.__init__(self, window)
 
         self.configure(background=PALETTE["BACKGROUND"])
 
@@ -47,6 +48,6 @@ class Credits(tk.Frame):
             self,
             text="Powrót do menu",
             type="PRIMARY",
-            command=parent.switch_scene,
+            command=store.instance.call_switch_scene,
             arg=PAGES["MENU"],
         ).grid(row=8, column=0, pady=50)

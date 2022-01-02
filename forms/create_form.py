@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter import filedialog
 
 from config import PAGES, PALETTE, FONTS
+import core.store as store
 
 from components.normal_text import NormalText
 from components.section_header import SectionHeader
@@ -14,11 +15,9 @@ from forms.message_box import MessageBox
 
 
 class CreateForm(Modal):
-    def __init__(self, window, scene_manager):
+    def __init__(self, window):
         super().__init__(
             window=window,
-            data={},
-            item_name=None,
             title="Tworzenie BOM",
             size=(700, 200),
             message="Tworzenie nowego zestawienia BOM",
@@ -28,8 +27,6 @@ class CreateForm(Modal):
             rows=[0, 1, 2],
             columns=[0, 1, 2, 3],
         )
-
-        self.scene_manager = scene_manager
         self.create_widgets()
 
     def confirm(self):
@@ -45,7 +42,7 @@ class CreateForm(Modal):
         else:
             super().get_frame().destroy()
             self.open_file_dialog()
-            self.scene_manager.switch_scene(PAGES["WORKPAGE"])
+            store.instance.call_switch_scene(PAGES["WORKPAGE"])
 
     def create_widgets(self):
         self.name_label = NormalText(window=super().get_frame(), text="Nazwa")

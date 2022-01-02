@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
+
 from config import PALETTE, FONTS, PAGES
+import core.store as store
 
 from components.button import Button
 
@@ -18,17 +20,15 @@ class TreePanelButton(Button):
 
 
 class TreePanel(tk.PanedWindow):
-    item = None
     buttons = []
-    data = {}
-    item = None
 
-    def __init__(self, window, scene_manager):
+    def __init__(
+        self,
+        window,
+    ):
 
         super().__init__(window)
         self.window = window
-        self.scene_manager = scene_manager
-
         self.buttons = []
 
         self.buttons.append(
@@ -81,10 +81,6 @@ class TreePanel(tk.PanedWindow):
     def set_refresh_callback(self, refresh_callback):
         self.refresh_callback = refresh_callback
 
-    def set_item(self, data, item):
-        self.data = data
-        self.item = item
-
     def modify_panel(self, expand):
         if expand == False:
             self.buttons[1].grid_forget()
@@ -94,15 +90,13 @@ class TreePanel(tk.PanedWindow):
             self.buttons[2].grid()
 
     def add_item(self):
-        form = AddForm(self.window, self.data, self.item)
+        form = AddForm(self.window)
 
     def remove_item(self):
-        dialog = RemoveDialog(
-            self.window, self.data, self.item, self.refresh_callback
-        )
+        dialog = RemoveDialog(self.window, self.refresh_callback)
 
     def edit_item(self):
-        form = EditForm(self.window, self.data, self.item)
+        form = EditForm(self.window)
 
     def back_to_menu(self):
         self.scene_manager.switch_scene(PAGES["MENU"])

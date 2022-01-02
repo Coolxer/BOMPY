@@ -10,8 +10,6 @@ class Modal(tk.Frame):
     def __init__(
         self,
         window,
-        data,
-        item_name,
         title,
         size,
         message,
@@ -21,8 +19,6 @@ class Modal(tk.Frame):
         rows=[0, 1],
         columns=[0, 1, 2, 3, 4],
     ):
-        self.data = data
-        self.item_name = item_name
         self.confirm_auto_destroy = confirm_auto_destroy
 
         tk.Frame.__init__(self, window)
@@ -32,12 +28,6 @@ class Modal(tk.Frame):
 
         if not hide_buttons:
             self.show_buttons((1, 0), (1, 4))
-
-    def get_data(self):
-        return self.data
-
-    def get_item_name(self):
-        return self.item_name
 
     def confirm_action(self):
         self.confirm()

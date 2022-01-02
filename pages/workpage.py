@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter.messagebox import showinfo
 
 from config import PAGES, PALETTE
+import core.store as store
 
 from components.page_header import PageHeader
 from components.section_header import SectionHeader
@@ -12,33 +13,26 @@ from components.button import Button
 from components.tree import Tree
 from components.tree_panel import TreePanel
 
-# to remove
-from core.file_manager import FileManager
-
 
 class WorkPage(tk.Frame):
     tree = None
 
-    def __init__(self, parent):
-        tk.Frame.__init__(self, parent.window)
+    def __init__(self, window):
+        tk.Frame.__init__(self, window)
 
         self.configure(background=PALETTE["BACKGROUND"])
 
-        file_manager = FileManager(
-            "F:/CURRENT/USLUGI_SIECIOWE_W_BIZNESIE/PRO/code/data.json"
-        )
-
-        data = file_manager.load_from_file()
-
-        PageHeader(self, text=f"Zestawienie BOM dla: {data['name']}").grid(
-            row=0, column=0, ipady=30
-        )
+        PageHeader(
+            self,
+            # text=f"Zestawienie BOM dla: {store.instance.get_data()['name']}",
+            text="Zestawienie BOM dla",
+        ).grid(row=0, column=0, ipady=30)
 
         self.rowconfigure([0, 1], weight=1)
         self.columnconfigure(0, weight=1)
 
-        panel = TreePanel(self, parent)
-        tree = Tree(self, data, panel)
+        panel = TreePanel(self)
+        tree = Tree(self, panel)
 
         panel.set_refresh_callback(tree.draw)
 

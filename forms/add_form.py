@@ -5,11 +5,9 @@ from forms.object_form import ObjectForm
 
 
 class AddForm(ObjectForm):
-    def __init__(self, window, data, item_name):
+    def __init__(self, window):
         super().__init__(
             window=window,
-            data=data,
-            item_name=item_name,
             title="Dodawanie obiektu",
             size=(600, 400),
             message="Dodawanie obiektu",
