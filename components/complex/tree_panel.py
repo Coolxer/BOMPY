@@ -98,4 +98,4 @@ class TreePanel(tk.PanedWindow):
         form = EditForm(self.window)
 
     def back_to_menu(self):
-        store.instance.call_switch_scene(PAGES["MENU"])
+        store.instance.get_scene_manager().switch_scene(PAGES["MENU"])

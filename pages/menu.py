@@ -24,25 +24,30 @@ class Menu(tk.Frame):
 
         PageHeader(self, text="MENU GŁÓWNE").grid(row=0, column=0, ipady=30)
 
+        scene_manager = store.instance.get_scene_manager()
+        file_manager = store.instance.get_file_manager()
+
         Button(
             self,
             text="Utwórz zestawienie (BOM)",
             type="PRIMARY",
-            command=self.create_bom,
+            command=CreateForm,
+            arg=window,
         ).grid(row=1, column=0, ipadx=20, pady=20)
 
         Button(
             self,
             text="Wczytaj zestawienie (BOM)",
             type="PRIMARY",
-            command=self.open_file_dialog,
+            command=file_manager.open_to_read,
+            arg=window,
         ).grid(row=2, column=0, ipadx=20, pady=20)
 
         Button(
             self,
             "Informacje",
             "PRIMARY",
-            command=store.instance.call_switch_scene,
+            command=scene_manager.switch_scene,
             arg=PAGES["CREDITS"],
         ).grid(row=3, column=0, ipadx=20, pady=20)
 
@@ -52,30 +57,3 @@ class Menu(tk.Frame):
             "DANGER",
             command=window.destroy,
         ).grid(row=4, column=0, ipadx=20, pady=20)
-
-    def create_bom(self):
-        create_form = CreateForm(self)
-
-    def open_file_dialog(self):
-        file = tkinter.filedialog.askopenfilename(
-            title="Wybierz plik zawierajacy zestawienie",
-            filetypes=(("Bompy file", "*.json"),),
-        )
-
-        try:
-            file_manager = FileManager(file)
-
-            data = file_manager.load()
-
-            if data is None:
-                MessageBox(
-                    self,
-                    "Błąd pliku",
-                    (500, 100),
-                    "Plik niezgodny z aplikacją",
-                )
-            else:
-                store.instance.set_data(data)
-                store.instance.call_switch_scene(PAGES["WORKPAGE"])
-        except:
-            pass

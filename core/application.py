@@ -35,7 +35,8 @@ class Application(tk.Tk):
         self.grid_rowconfigure([0, 1, 2, 3, 4], weight=1)
         self.grid_columnconfigure([0], weight=1)
 
-        store.instance.set_scene_manager(self)
+        store.instance.set_window(self)
+        store.instance.get_scene_manager().switch_scene(PAGES["MENU"])
 
     def define_window_geometry(self, window_width, window_height):
         screen_width = self.winfo_screenwidth()

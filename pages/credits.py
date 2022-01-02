@@ -47,6 +47,6 @@ class Credits(tk.Frame):
             self,
             text="Powrót do menu",
             type="PRIMARY",
-            command=store.instance.call_switch_scene,
+            command=store.instance.get_scene_manager().switch_scene,
             arg=PAGES["MENU"],
         ).grid(row=8, column=0, pady=50)

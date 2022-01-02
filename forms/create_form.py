@@ -39,8 +39,8 @@ class CreateForm(Modal):
             )
         else:
             super().get_frame().destroy()
-            self.open_file_dialog()
-            store.instance.call_switch_scene(PAGES["WORKPAGE"])
+            store.instance.set_project_name(name_output)
+            store.instance.get_file_manager().open_to_write()
 
     def create_widgets(self):
         self.name_label = NormalText(window=super().get_frame(), text="Nazwa")
@@ -56,14 +56,3 @@ class CreateForm(Modal):
         self.name_input.grid(row=1, column=2)
 
         super().show_buttons((2, 0), (2, 3))
-
-    def open_file_dialog(self):
-        file = tk.filedialog.asksaveasfilename()(
-            title="Wybierz lokalizację pliku zestawienia",
-            filetypes=(("Bompy file", "*.json"),),
-            defaultextension="*.json",
-        )
-
-        file_manager = FileManager(file)
-
-        data = {}

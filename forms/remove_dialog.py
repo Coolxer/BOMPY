@@ -16,10 +16,14 @@ class RemoveDialog(Modal):
 
     def confirm(self):
         self.recursive_lookup(store.instance.get_data())
+        store.instance.get_file_manager().save()
         self.remove_callback()
 
     def recursive_lookup(self, item, index=0):
-        if item["name"] == store.instance.get_item():
+        if (
+            "identifier" in item
+            and item["identifier"] == store.instance.get_item()
+        ):
             return index
 
         index = 0
