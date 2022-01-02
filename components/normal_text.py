@@ -1,9 +1,9 @@
-import tkinter as tk
+from tkinter import Label
 
 from config import PALETTE, FONTS
 
 
-class NormalText(tk.Label):
+class NormalText(Label):
     def __init__(self, window, text):
         super().__init__(window)
 
@@ -12,4 +12,3 @@ class NormalText(tk.Label):
         self["background"] = PALETTE["BACKGROUND"]
         self["font"] = FONTS["NORMAL_TEXT"]
         self["wraplength"] = 500
-        # self["justify"] = "left"

@@ -1,5 +1,4 @@
 import tkinter as tk
-
 from config import PAGES, PALETTE
 import core.store as store
 

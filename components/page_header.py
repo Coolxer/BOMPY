@@ -1,9 +1,8 @@
-import tkinter as tk
-
+from tkinter import Label
 from config import PALETTE, FONTS
 
 
-class PageHeader(tk.Label):
+class PageHeader(Label):
     def __init__(self, window, text):
         super().__init__(window)
 

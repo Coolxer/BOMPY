@@ -1,9 +1,9 @@
-import tkinter as tk
+from tkinter import Label
 
 from config import PALETTE, FONTS
 
 
-class SectionHeader(tk.Label):
+class SectionHeader(Label):
     def __init__(self, window, text):
         super().__init__(window)
 

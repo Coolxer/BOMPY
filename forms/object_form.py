@@ -1,6 +1,3 @@
-import tkinter as tk
-from tkinter import ttk
-
 from config import PALETTE, FONTS
 from components.normal_text import NormalText
 from components.button import Button

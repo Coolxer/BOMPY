@@ -1,6 +1,3 @@
-import tkinter as tk
-from tkinter import ttk
-
 from forms.object_form import ObjectForm
 
 

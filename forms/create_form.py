@@ -1,6 +1,4 @@
 import tkinter as tk
-from tkinter import ttk
-from tkinter import filedialog
 
 from config import PAGES, PALETTE, FONTS
 import core.store as store
@@ -60,7 +58,7 @@ class CreateForm(Modal):
         super().show_buttons((2, 0), (2, 3))
 
     def open_file_dialog(self):
-        file = filedialog.asksaveasfilename()(
+        file = tk.filedialog.asksaveasfilename()(
             title="Wybierz lokalizację pliku zestawienia",
             filetypes=(("Bompy file", "*.json"),),
             defaultextension="*.json",

@@ -1,11 +1,9 @@
-import tkinter as tk
-
+from tkinter import Entry
 from functools import partial
-
 from config import PALETTE, FONTS
 
 
-class Input(tk.Entry):
+class Input(Entry):
     def __init__(
         self,
         window,
@@ -18,7 +16,6 @@ class Input(tk.Entry):
         super().__init__(window, justify="center")
 
         self["width"] = 20
-        # self["height"] = 3
         self["text"] = placeholder
         self["foreground"] = PALETTE["PRIMARY"]
         self["background"] = PALETTE["BACKGROUND"]

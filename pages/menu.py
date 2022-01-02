@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import filedialog
+import tkinter.filedialog
 
 from config import PAGES, PALETTE, FONTS
 import core.store as store
@@ -57,7 +57,7 @@ class Menu(tk.Frame):
         create_form = CreateForm(self)
 
     def open_file_dialog(self):
-        file = filedialog.askopenfilename(
+        file = tkinter.filedialog.askopenfilename(
             title="Wybierz plik zawierajacy zestawienie",
             filetypes=(("Bompy file", "*.json"),),
         )

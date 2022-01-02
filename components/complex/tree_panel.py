@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import ttk
 
 from config import PALETTE, FONTS, PAGES
 import core.store as store
@@ -99,4 +98,4 @@ class TreePanel(tk.PanedWindow):
         form = EditForm(self.window)
 
     def back_to_menu(self):
-        self.scene_manager.switch_scene(PAGES["MENU"])
+        store.instance.call_switch_scene(PAGES["MENU"])

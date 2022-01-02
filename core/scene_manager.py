@@ -1,4 +1,4 @@
-import tkinter as tk
+from tkinter import NSEW
 
 from pages.menu import Menu
 from pages.workpage import WorkPage
@@ -22,7 +22,7 @@ class SceneManager:
             self.scene.destroy()
 
         self.scene = scene
-        self.scene.grid(row=0, column=0, sticky=tk.NSEW)
+        self.scene.grid(row=0, column=0, sticky=NSEW)
 
     def map_index_to_scene(self, index):
         if index == PAGES["MENU"]:

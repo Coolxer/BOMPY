@@ -1,11 +1,10 @@
-import tkinter as tk
-
+from tkinter import Button as Btn
 from functools import partial
 
 from config import PALETTE, FONTS
 
 
-class Button(tk.Button):
+class Button(Btn):
     def __init__(self, window, text, type, command, arg=None):
         super().__init__(window)
 

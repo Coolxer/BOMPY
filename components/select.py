@@ -1,19 +1,18 @@
-import tkinter as tk
+from tkinter import OptionMenu, StringVar
 
 from config import FONTS, PALETTE
 
 
-class Select(tk.OptionMenu):
+class Select(OptionMenu):
     value = None
 
     def __init__(self, window, values):
-        self.value = tk.StringVar()
+        self.value = StringVar()
         self.value.set(values[0])
 
         super().__init__(window, self.value, *values)
 
         self["width"] = 15
-        # self["height"] = 2
         self["foreground"] = PALETTE["PRIMARY"]
         self["background"] = PALETTE["BACKGROUND"]
         self["font"] = FONTS["NORMAL_TEXT"]
