@@ -5,17 +5,14 @@ import core.store as store
 
 from config import BASE_CONFIG, PAGES, PALETTE
 
-
+# główna klasa aplikacji
 class Application(tk.Tk):
-    scene_manager: None
-
     def __init__(self):
         tk.Tk.__init__(self)
 
         style = ttk.Style()
         style.theme_use("clam")
 
-        # main window settings
         self.title(
             f"{BASE_CONFIG['APP_NAME']} | {BASE_CONFIG['AUTHOR']} | VER: {BASE_CONFIG['VERSION']}"
         )

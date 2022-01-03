@@ -1,3 +1,5 @@
+# plik konfiguracyjny aplikacji
+
 BASE_CONFIG = {
     "APP_NAME": "BOMPY",
     "AUTHOR": "LUKASZ MILOS",

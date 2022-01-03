@@ -2,7 +2,7 @@ from forms.modal import Modal
 from components.button import Button
 from config import FONTS
 
-
+# klasa okna informacyjnego typu modalnego
 class MessageBox(Modal):
     def __init__(
         self,
@@ -32,6 +32,7 @@ class MessageBox(Modal):
             pady=10,
         )
 
+    # metoda wywoyłwana w celu potwierdzenia i zamknięcia okna
     def confirm(self):
         if self.confirm_callback is not None:
             self.confirm_callback(self.confirm_args)

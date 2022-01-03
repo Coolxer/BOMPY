@@ -4,12 +4,9 @@ from config import FONTS, PALETTE
 
 
 class Select(OptionMenu):
-    value = None
-
     def __init__(self, window, values):
         self.value = StringVar()
         self.value.set(values[0])
-
         super().__init__(window, self.value, *values)
 
         self["width"] = 15

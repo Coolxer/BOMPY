@@ -1,7 +1,7 @@
 from core.scene_manager import SceneManager
 from core.file_manager import FileManager
 
-
+# klasa przechowująca wartości globalne w obrębie programu
 class Store:
     def __init__(self):
         self.window = None

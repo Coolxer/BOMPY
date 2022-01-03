@@ -2,7 +2,7 @@ from forms.object_form import ObjectForm
 
 import core.store as store
 
-
+# klasa formularza dodawania nowego elementu
 class AddForm(ObjectForm):
     def __init__(self, window, add_callback):
         super().__init__(
@@ -17,11 +17,13 @@ class AddForm(ObjectForm):
 
         super().set_accept_action(self.accept)
 
+    # metoda dodająca element do listy
     def accept(self):
         self.recursive_lookup(store.instance.get_data())
         store.instance.get_file_manager().save()
         self.add_callback()
 
+    # metoda przeszukująca listę w celu znalezienia odpowiedniego miejsca na wstawienie elementu
     def recursive_lookup(self, item, index=0):
         if (
             "identifier" in item

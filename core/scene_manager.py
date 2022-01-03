@@ -1,14 +1,14 @@
 from tkinter import NSEW
 
+from config import PAGES
+
 from pages.menu import Menu
 from pages.workpage import WorkPage
 from pages.credits import Credits
 
-from config import PAGES
 
-
+# klasa zarządzająca aktualnie wyświetlaną sceną
 class SceneManager:
-    window = None
     scene = None
 
     def __init__(self, window):

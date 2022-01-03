@@ -1,7 +1,7 @@
 from forms.modal import Modal
 import core.store as store
 
-
+# klasa reprezentująca okno potwierdzające chęć usunięcia obiektu
 class RemoveDialog(Modal):
     def __init__(self, window, remove_callback):
         super().__init__(
@@ -14,11 +14,13 @@ class RemoveDialog(Modal):
 
         self.remove_callback = remove_callback
 
+    # metoda usuwająca element z listy
     def confirm(self):
         self.recursive_lookup(store.instance.get_data())
         store.instance.get_file_manager().save()
         self.remove_callback()
 
+    # metoda przeszukująca dane w poszukiwaniu elementu do usunięcia
     def recursive_lookup(self, item, index=0):
         if (
             "identifier" in item

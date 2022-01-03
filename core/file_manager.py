@@ -7,17 +7,20 @@ from config import PAGES
 import core.store as store
 from forms.message_box import MessageBox
 
-
+# klasa obługująca pliki
 class FileManager:
+
+    # metoda służąca do walidacji pliku wejściowego (zgodny z aplikacją)
     def validate(self, data):
         if "application" not in data or "name" not in data:
             return False
 
-        elif data["application"] != "bompy":
+        elif data["application"] != "bompy" or not len(data["name"]):
             return False
 
         return True
 
+    # metoda wczytująca dane z pliku
     def load(self, path=None):
         ph = store.instance.get_file_path()
 
@@ -33,6 +36,7 @@ class FileManager:
 
         return data
 
+    # metoda zapisująca dane do pliku
     def save(self, path=None, data=None):
         dt = store.instance.get_data()
         ph = store.instance.get_file_path()
@@ -42,14 +46,15 @@ class FileManager:
 
         if data is not None:
             dt = data
-            
-        if '.json' not in ph:
-            ph += '.json'
+
+        if ".json" not in ph:
+            ph += ".json"
 
         file = open(ph, "w+")
         file.write(json.dumps(dt))
         file.close()
 
+    # metoda otwierająca okno do wyboru pliku zestawienia do odczytu
     def open_to_read(self, window):
         path = tk.filedialog.askopenfilename(
             title="Wybierz plik zawierajacy zestawienie",
@@ -74,10 +79,11 @@ class FileManager:
         store.instance.set_data(data)
         store.instance.get_scene_manager().switch_scene(PAGES["WORKPAGE"])
 
+    # metoda otwierająca okno do wyboru pliku zestawienia do zapisu
     def open_to_write(self):
         path = tk.filedialog.asksaveasfilename(
             title="Wybierz lokalizację pliku zestawienia",
-            filetypes=(("json", "*.json"),),
+            filetypes=(("Bompy file", "*.json"),),
         )
 
         if not len(path):
@@ -92,7 +98,6 @@ class FileManager:
 
             self.save(path, data)
         except:
-            print("here")
             return
 
         store.instance.set_file_path(path)

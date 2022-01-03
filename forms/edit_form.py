@@ -1,7 +1,7 @@
 from forms.object_form import ObjectForm
 import core.store as store
 
-
+# klasa formularza dodawania nowego elementu
 class EditForm(ObjectForm):
     def __init__(self, window, edit_callback):
         super().__init__(
@@ -17,11 +17,13 @@ class EditForm(ObjectForm):
         super().init_values()
         super().set_accept_action(self.accept)
 
+    # metoda edytuje dany element drzewa
     def accept(self):
         self.recursive_lookup(store.instance.get_data())
         store.instance.get_file_manager().save()
         self.edit_callback()
 
+    # metoda przeszukuje listę w celu znalezienia wskazanego elementu do edycji
     def recursive_lookup(self, item, index=0):
         if (
             "identifier" in item

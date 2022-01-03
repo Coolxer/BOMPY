@@ -3,29 +3,27 @@ import tkinter.filedialog
 
 from config import PAGES, PALETTE, FONTS
 import core.store as store
-
 from core.file_manager import FileManager
 
-from components.page_header import PageHeader
+from components.text import PageHeader
 from components.button import Button
 
 from forms.create_form import CreateForm
 from forms.message_box import MessageBox
 
-
+# menu główne aplikacji
 class Menu(tk.Frame):
     def __init__(self, window):
         tk.Frame.__init__(self, window)
 
         self.configure(background=PALETTE["BACKGROUND"])
-
         self.rowconfigure([0, 1, 2, 3, 4], weight=1)
         self.columnconfigure(0, weight=1)
 
-        PageHeader(self, text="MENU GŁÓWNE").grid(row=0, column=0, ipady=30)
-
         scene_manager = store.instance.get_scene_manager()
         file_manager = store.instance.get_file_manager()
+
+        PageHeader(self, text="MENU GŁÓWNE").grid(row=0, column=0, ipady=30)
 
         Button(
             self,

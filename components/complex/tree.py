@@ -1,10 +1,10 @@
 import tkinter as tk
 from tkinter import ttk
 
-from config import PALETTE, FONTS, PAGES
+from config import PAGES, PALETTE, FONTS
 import core.store as store
 
-from components.section_header import SectionHeader
+from components.text import SectionHeader
 from forms.message_box import MessageBox
 
 MAX_DISPLAYING_ITEMS = 10
@@ -12,7 +12,6 @@ MAX_DISPLAYING_ITEMS = 10
 
 class Tree(ttk.Treeview):
     scrollbar = None
-    empty_message = None
 
     def __init__(self, window, panel):
         self.window = window
@@ -23,14 +22,14 @@ class Tree(ttk.Treeview):
         self.configure_style()
         super().__init__(window, style="mystyle.Treeview")
 
-        self["selectmode"] = "browse"  # can select only one item at a time
+        self["selectmode"] = "browse"
         self.prepare_columns()
         self.service_scrollbar(window)
 
         self.bind("<<TreeviewSelect>>", self.handleSelectEvent)
-
         self.draw()
 
+    # metoda ustawia styl dla widoku drzewa
     def configure_style(self):
         style = ttk.Style()
 
@@ -68,6 +67,7 @@ class Tree(ttk.Treeview):
             ],
         )
 
+    # metoda przygotowuje kolumny dla widoku
     def prepare_columns(self):
         self["columns"] = (
             "name",
@@ -86,6 +86,7 @@ class Tree(ttk.Treeview):
         self.heading("unit_cost", text="Cena jedn.")
         self.heading("total_cost", text="Suma")
 
+    # metoda dodaje element do drzewa o odpowiednim stopniu zagnieżdżenia
     def add_item(self, item):
         try:
             self.insert(
@@ -107,11 +108,12 @@ class Tree(ttk.Treeview):
                 self.window,
                 "Błąd pliku",
                 (500, 100),
-                "Błąd zestawienia (zduplikowany identyfikator)",
+                "Błąd zestawienia (zduplikowany identyfikator) / brak wartości",
                 store.instance.get_scene_manager().switch_scene,
                 PAGES["MENU"],
             )
 
+    # metoda rekurencyjna przeszukiwania obiektu i dodająca element do drzewa
     def build(self, item, parent_id=""):
         if self.first_iteration == True:
             self.first_iteration = False
@@ -126,8 +128,8 @@ class Tree(ttk.Treeview):
             for el in item["sub_parts"]:
                 self.build(el, item["identifier"])
 
+    # metoda przerysowująca drzewo
     def draw(self):
-
         self.first_iteration = True
         self.delete(*self.get_all_children())
         self.build(store.instance.get_data())
@@ -148,9 +150,8 @@ class Tree(ttk.Treeview):
             self["height"] = MAX_DISPLAYING_ITEMS
 
         self.panel.modify_panel(expand=True)
-        if self.empty_message is not None:
-            self.empty_message.grid_forget()
 
+    # metoda obsługująca pasek przewijania dla widoku drzewa
     def service_scrollbar(self, window):
         window.update_idletasks()
 
@@ -161,6 +162,7 @@ class Tree(ttk.Treeview):
 
         self.configure(yscrollcommand=self.scrollbar.set)
 
+    # metoda obsługująca zdarzenie wyboru elementu drzewa
     def handleSelectEvent(self, event):
         selected = self.focus()
         store.instance.set_item(self.item(selected), selected)
@@ -175,11 +177,9 @@ class Tree(ttk.Treeview):
             for btn in self.panel.buttons:
                 btn.set_state(tk.NORMAL)
 
+    # metoda zwracająca wszystkie elementy drzewa, w tym zagnieżdżone
     def get_all_children(self, item=""):
         children = self.get_children(item)
         for child in children:
             children += self.get_all_children(child)
         return children
-
-    def is_empty(self):
-        return len(self.get_all_children()) == 0

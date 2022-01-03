@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from config import PALETTE, FONTS, PAGES
+from config import PAGES, PALETTE, FONTS
 import core.store as store
 
 from components.button import Button
@@ -27,6 +27,7 @@ class TreePanel(tk.PanedWindow):
     ):
 
         super().__init__(window)
+        self.configure(background=PALETTE["BACKGROUND"])
         self.window = window
         self.buttons = []
 
@@ -67,15 +68,12 @@ class TreePanel(tk.PanedWindow):
         )
 
         col = 0
-
         for btn in self.buttons:
             btn.set_state(tk.DISABLED)
             btn.grid(row=0, column=col, padx=5, pady=5)
             col += 1
 
         self.buttons[len(self.buttons) - 1].set_state(tk.NORMAL)
-
-        self.configure(background=PALETTE["BACKGROUND"])
 
     def set_refresh_callback(self, refresh_callback):
         self.refresh_callback = refresh_callback

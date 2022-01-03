@@ -1,10 +1,10 @@
 import tkinter as tk
-
 from config import PALETTE, FONTS
+
+from components.text import SectionHeader
 from components.button import Button
-from components.section_header import SectionHeader
 
-
+# klasa okna modalnego
 class Modal(tk.Frame):
     def __init__(
         self,
@@ -28,6 +28,7 @@ class Modal(tk.Frame):
         if not hide_buttons:
             self.show_buttons((1, 0), (1, 4))
 
+    # akcja wykonywana po naciśnięciu przycisku potwierdzenia
     def confirm_action(self):
         self.confirm()
         if (
@@ -36,16 +37,20 @@ class Modal(tk.Frame):
         ):
             self.frame.destroy()
 
+    # akcja wykonywana po naciśnięciu przycisku "Anuluj"
     def cancel_action(self):
         self.cancel()
         self.frame.destroy()
 
+    # metoda potwierdzenia przesłaniana przez metodę dziecka
     def confirm(self):
         pass
 
+    # metoda rezygnacji przesłaniana przez metodę dziecka
     def cancel(self):
         pass
 
+    # metoda definiująca rozmiar i pozycję okna modalnego
     def define_window_geometry(self, window_width, window_height):
         screen_width = self.winfo_screenwidth()
         screen_height = self.winfo_screenheight()
@@ -57,6 +62,7 @@ class Modal(tk.Frame):
             "%dx%d+%d+%d" % (window_width, window_height, x_pos, y_pos)
         )
 
+    # metoda tworząca okno modalne
     def create_window(
         self, window, title, size, message, confirm_text, rows, columns
     ):
@@ -91,6 +97,7 @@ class Modal(tk.Frame):
 
         self.define_window_geometry(size[0], size[1])
 
+    # metoda wyświetlająca przyciski potwierdzenia i rezygnacji na odpowiednich pozycjach układu
     def show_buttons(self, cf_btn_pos, cn_btn_pos):
         self.confirm_btn.grid(
             row=cf_btn_pos[0],
@@ -107,8 +114,10 @@ class Modal(tk.Frame):
             pady=10,
         )
 
+    # metoda zwracająca przyciski
     def get_buttons(self):
         return [self.confirm_btn, self.cancel_btn]
 
+    # metoda zwracająca okno modalne
     def get_frame(self):
         return self.frame

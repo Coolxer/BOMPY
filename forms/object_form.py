@@ -1,17 +1,16 @@
 from config import PALETTE, FONTS
-from components.normal_text import NormalText
+from core.units import UNITS
+import core.store as store
+
+from components.text import NormalText
 from components.button import Button
 from components.input import Input
 from components.select import Select
 
 from forms.modal import Modal
-from core.units import UNITS
-
-import core.store as store
-
 from forms.message_box import MessageBox
 
-
+# klasa reprezentująca formularz obiektu
 class ObjectForm(Modal):
     def __init__(self, window, title, size, message, confirm_text):
         super().__init__(
@@ -28,6 +27,7 @@ class ObjectForm(Modal):
 
         self.create_widgets()
 
+    # metoda tworząca poszczególne etykiety i pola interaktywne odnośnie parametrów obiektu
     def create_widgets(self):
         identifier_label = NormalText(
             window=super().get_frame(), text="Identyfikator"
@@ -83,6 +83,7 @@ class ObjectForm(Modal):
 
         super().show_buttons((6, 0), (6, 3))
 
+    # metoda walidująca dane, wywoływana po potwierdzeniu formularza
     def confirm(self):
         identifier_output = self.identifier_input.validate()
         name_output = self.name_input.validate()
@@ -115,6 +116,7 @@ class ObjectForm(Modal):
             self.accept_action()
             super().get_frame().destroy()
 
+    # metoda ustawiająca dane w poszczególnych polach interaktywnych na starcie
     def init_values(self):
         values = store.instance.get_item()["values"]
 
@@ -124,9 +126,11 @@ class ObjectForm(Modal):
         self.unit_select.set_value(values[3])
         self.unit_cost_input.insert(0, values[4])
 
+    # metoda ustawiająca akcję potwierdzenia
     def set_accept_action(self, accept_action):
         self.accept_action = accept_action
 
+    # metoda zwracająca obiekt z danymi formularza
     def get_form_values(self):
         obj = {
             "identifier": self.identifier_input.get_value(),

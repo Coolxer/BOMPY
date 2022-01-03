@@ -3,15 +3,14 @@ import tkinter as tk
 from config import PAGES, PALETTE, FONTS
 import core.store as store
 
-from components.normal_text import NormalText
-from components.section_header import SectionHeader
+from components.text import SectionHeader, NormalText
 from components.button import Button
 from components.input import Input
 
 from forms.modal import Modal
 from forms.message_box import MessageBox
 
-
+# klasa formularza tworzenia nowego zestawienia
 class CreateForm(Modal):
     def __init__(self, window):
         super().__init__(
@@ -27,6 +26,7 @@ class CreateForm(Modal):
         )
         self.create_widgets()
 
+    # metoda sprawdza poprawność danych i ewentualnie zapisuje dane w pliku
     def confirm(self):
         name_output = self.name_input.validate()
 
@@ -42,6 +42,7 @@ class CreateForm(Modal):
             store.instance.set_project_name(name_output)
             store.instance.get_file_manager().open_to_write()
 
+    # metoda tworzy widżety niezbędne dla tego okna
     def create_widgets(self):
         self.name_label = NormalText(window=super().get_frame(), text="Nazwa")
         self.name_input = Input(
