@@ -20,6 +20,8 @@ class MessageBox(Modal):
             message=message,
             confirm_text="OK",
             hide_buttons=True,
+            rows=[0, 1],
+            columns=[2],
         )
 
         self.confirm_callback = confirm_callback
@@ -27,7 +29,7 @@ class MessageBox(Modal):
 
         super().get_buttons()[0].grid(
             row=1,
-            column=1,
+            column=2,
             padx=10,
             pady=10,
         )
