@@ -10,6 +10,7 @@ class Store:
         self.file_path = None
         self.data = {}
         self.selected_item = None
+        self.identifier = None
 
     def set_window(self, window):
         self.window = window
@@ -43,11 +44,16 @@ class Store:
     ):
         return self.data
 
-    def set_item(self, item):
+    def set_item(self, item, identifier):
+        item["values"].insert(0, identifier)
         self.selected_item = item
+        self.identifier = identifier
 
     def get_item(self):
         return self.selected_item
+
+    def get_identifier(self):
+        return self.identifier
 
 
 instance = Store()

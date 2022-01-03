@@ -24,3 +24,6 @@ class Select(OptionMenu):
 
     def get_value(self):
         return self.value.get()
+
+    def set_value(self, value):
+        self.value.set(value)

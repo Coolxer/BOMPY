@@ -22,7 +22,7 @@ class RemoveDialog(Modal):
     def recursive_lookup(self, item, index=0):
         if (
             "identifier" in item
-            and item["identifier"] == store.instance.get_item()
+            and item["identifier"] == store.instance.get_item()["text"]
         ):
             return index
 

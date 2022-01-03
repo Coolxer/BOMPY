@@ -98,7 +98,7 @@ class Tree(ttk.Treeview):
                     item["quantity"],
                     item["unit"],
                     item["unit_cost"],
-                    item["total_cost"],
+                    int(item["quantity"] * int(item["unit_cost"])),
                 ),
                 open=True,
             )
@@ -108,7 +108,7 @@ class Tree(ttk.Treeview):
                 "Błąd pliku",
                 (500, 100),
                 "Błąd zestawienia (zduplikowany identyfikator)",
-                self.panel.scene_manager.switch_scene,
+                store.instance.get_scene_manager().switch_scene,
                 PAGES["MENU"],
             )
 
@@ -127,36 +127,32 @@ class Tree(ttk.Treeview):
                 self.build(el, item["identifier"])
 
     def draw(self):
+
         self.first_iteration = True
         self.delete(*self.get_all_children())
         self.build(store.instance.get_data())
 
-        if self.is_empty():
-            self.grid_forget()
-            self.scrollbar.grid_forget()
+        self.insert(
+            "",
+            0,
+            "#",
+            text="",
+            values=("", "", "", "", ""),
+        )
 
-            self.panel.modify_panel(expand=False)
-            self.empty_message = SectionHeader(
-                self.window, "Brak elementów zestawienia"
-            )
-            self.empty_message.grid(row=1, column=0, ipadx=20, ipady=20)
-            self.panel.buttons[0].set_state(tk.NORMAL)
+        items = len(self.get_all_children()) - 1
+
+        if items < MAX_DISPLAYING_ITEMS:
+            self["height"] = items
         else:
-            self.grid()
-            self.scrollbar.grid()
-            items = len(self.get_all_children()) - 1
+            self["height"] = MAX_DISPLAYING_ITEMS
 
-            if items < MAX_DISPLAYING_ITEMS:
-                self["height"] = items
-            else:
-                self["height"] = MAX_DISPLAYING_ITEMS
-
-            self.panel.modify_panel(expand=True)
-            if self.empty_message is not None:
-                self.empty_message.grid_forget()
+        self.panel.modify_panel(expand=True)
+        if self.empty_message is not None:
+            self.empty_message.grid_forget()
 
     def service_scrollbar(self, window):
-        window.update_idletasks()  # potrzebne zeby sie dobrze pokazywala szerokosc
+        window.update_idletasks()
 
         self.scrollbar = ttk.Scrollbar(
             window, orient="vertical", command=self.yview
@@ -167,11 +163,17 @@ class Tree(ttk.Treeview):
 
     def handleSelectEvent(self, event):
         selected = self.focus()
+        store.instance.set_item(self.item(selected), selected)
 
-        store.instance.set_item(selected)
+        if selected == "#":
+            self.panel.buttons[0].set_state(tk.NORMAL)
+            self.panel.buttons[1].set_state(tk.DISABLED)
+            self.panel.buttons[2].set_state(tk.DISABLED)
+            self.panel.buttons[3].set_state(tk.NORMAL)
 
-        for btn in self.panel.buttons:
-            btn.set_state(tk.NORMAL)
+        else:
+            for btn in self.panel.buttons:
+                btn.set_state(tk.NORMAL)
 
     def get_all_children(self, item=""):
         children = self.get_children(item)
