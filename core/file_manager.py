@@ -64,8 +64,12 @@ class FileManager:
         if not len(path):
             return
 
+        data = {}
+
         try:
             data = self.load(path)
+            if not data:
+                raise Exception()
         except:
             MessageBox(
                 window,
@@ -76,6 +80,7 @@ class FileManager:
             return
 
         store.instance.set_file_path(path)
+        store.instance.set_project_name(data["name"])
         store.instance.set_data(data)
         store.instance.get_scene_manager().switch_scene(PAGES["WORKPAGE"])
 

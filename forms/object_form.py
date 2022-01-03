@@ -114,7 +114,6 @@ class ObjectForm(Modal):
                 message=msg,
             )
         else:
-            print("here")
             self.submit_action(el, item, result)
             super().get_frame().destroy()
 
@@ -139,7 +138,9 @@ class ObjectForm(Modal):
             "name": self.name_input.get_value(),
             "quantity": int(self.quantity_input.get_value()),
             "unit": self.unit_select.get_value(),
-            "unit_cost": float(self.unit_cost_input.get_value()),
+            "unit_cost": float(
+                self.unit_cost_input.get_value().replace(",", ".")
+            ),
         }
 
         return obj
