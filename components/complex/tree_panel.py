@@ -75,9 +75,6 @@ class TreePanel(tk.PanedWindow):
 
         self.buttons[len(self.buttons) - 1].set_state(tk.NORMAL)
 
-    def set_refresh_callback(self, refresh_callback):
-        self.refresh_callback = refresh_callback
-
     def modify_panel(self, expand):
         if expand == False:
             self.buttons[1].grid_forget()
@@ -87,13 +84,13 @@ class TreePanel(tk.PanedWindow):
             self.buttons[2].grid()
 
     def add_item(self):
-        form = AddForm(self.window, self.refresh_callback)
+        form = AddForm(self.window)
 
     def remove_item(self):
-        dialog = RemoveDialog(self.window, self.refresh_callback)
+        dialog = RemoveDialog(self.window)
 
     def edit_item(self):
-        form = EditForm(self.window, self.refresh_callback)
+        form = EditForm(self.window)
 
     def back_to_menu(self):
         store.instance.get_scene_manager().switch_scene(PAGES["MENU"])

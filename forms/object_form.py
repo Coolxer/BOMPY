@@ -21,6 +21,7 @@ class ObjectForm(Modal):
             confirm_text=confirm_text,
             confirm_auto_destroy=False,
             hide_buttons=True,
+            lookup=True,
             rows=[0, 1, 2, 3, 4, 5, 6],
             columns=[0, 1, 2, 3],
         )
@@ -84,7 +85,7 @@ class ObjectForm(Modal):
         super().show_buttons((6, 0), (6, 3))
 
     # metoda walidująca dane, wywoływana po potwierdzeniu formularza
-    def confirm(self):
+    def confirm(self, el=None, item=None, result=None):
         identifier_output = self.identifier_input.validate()
         name_output = self.name_input.validate()
         quantity_output = self.quantity_input.validate()
@@ -113,7 +114,7 @@ class ObjectForm(Modal):
                 message=msg,
             )
         else:
-            self.accept_action()
+            self.submit_action(el, item, result)
             super().get_frame().destroy()
 
     # metoda ustawiająca dane w poszczególnych polach interaktywnych na starcie
@@ -126,9 +127,9 @@ class ObjectForm(Modal):
         self.unit_select.set_value(values[3])
         self.unit_cost_input.insert(0, values[4])
 
-    # metoda ustawiająca akcję potwierdzenia
-    def set_accept_action(self, accept_action):
-        self.accept_action = accept_action
+    # metoda ustawiająca akcję potwierdzenia formularza
+    def set_submit_action(self, submit_action):
+        self.submit_action = submit_action
 
     # metoda zwracająca obiekt z danymi formularza
     def get_form_values(self):

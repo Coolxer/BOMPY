@@ -22,7 +22,7 @@ class WorkPage(tk.Frame):
         panel = TreePanel(self)
         tree = Tree(self, panel)
 
-        panel.set_refresh_callback(tree.draw)
+        store.instance.set_refresh_callback(tree.draw)
 
         PageHeader(
             self,

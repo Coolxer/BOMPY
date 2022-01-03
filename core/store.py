@@ -11,6 +11,7 @@ class Store:
         self.data = {}
         self.selected_item = None
         self.identifier = None
+        self.refresh_callback = None
 
     def set_window(self, window):
         self.window = window
@@ -54,6 +55,12 @@ class Store:
 
     def get_identifier(self):
         return self.identifier
+
+    def set_refresh_callback(self, refresh_callback):
+        self.refresh_callback = refresh_callback
+
+    def call_refresh_callback(self):
+        self.refresh_callback()
 
 
 instance = Store()

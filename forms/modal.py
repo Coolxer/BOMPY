@@ -1,5 +1,7 @@
 import tkinter as tk
+
 from config import PALETTE, FONTS
+import core.store as store
 
 from components.text import SectionHeader
 from components.button import Button
@@ -14,11 +16,13 @@ class Modal(tk.Frame):
         message,
         confirm_text,
         confirm_auto_destroy=True,
+        lookup=False,
         hide_buttons=False,
         rows=[0, 1],
         columns=[0, 1, 2, 3, 4],
     ):
         self.confirm_auto_destroy = confirm_auto_destroy
+        self.lookup = lookup
 
         tk.Frame.__init__(self, window)
         self.create_window(
@@ -28,9 +32,36 @@ class Modal(tk.Frame):
         if not hide_buttons:
             self.show_buttons((1, 0), (1, 4))
 
+    # metoda przeszukuje listę w celu znalezienia wskazanego elementu
+    def recursive_lookup(self, item, index=0):
+        if (
+            "identifier" in item
+            and item["identifier"] == store.instance.get_identifier()
+        ):
+            return index
+
+        index = 0
+        for el in item["sub_parts"]:
+            result = self.recursive_lookup(el, index)
+            if result >= 0:
+                self.confirm(el, item, result)
+                break
+
+            index += 1
+
+        return -1
+
     # akcja wykonywana po naciśnięciu przycisku potwierdzenia
     def confirm_action(self):
-        self.confirm()
+        if self.lookup:
+            if store.instance.get_identifier() == "#":
+                self.confirm(store.instance.get_data())
+            else:
+                self.recursive_lookup(store.instance.get_data())
+
+            store.instance.get_file_manager().save()
+            store.instance.call_refresh_callback()
+
         if (
             self.confirm_auto_destroy is not None
             and self.confirm_auto_destroy == True
@@ -43,7 +74,7 @@ class Modal(tk.Frame):
         self.frame.destroy()
 
     # metoda potwierdzenia przesłaniana przez metodę dziecka
-    def confirm(self):
+    def confirm(self, el=None, item=None, result=None):
         pass
 
     # metoda rezygnacji przesłaniana przez metodę dziecka
