@@ -89,7 +89,7 @@ class TreePanel(tk.PanedWindow):
             self.buttons[2].grid()
 
     def add_item(self):
-        form = AddForm(self.window)
+        form = AddForm(self.window, self.refresh_callback)
 
     def remove_item(self):
         dialog = RemoveDialog(self.window, self.refresh_callback)

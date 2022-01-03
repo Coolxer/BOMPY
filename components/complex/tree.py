@@ -98,7 +98,7 @@ class Tree(ttk.Treeview):
                     item["quantity"],
                     item["unit"],
                     item["unit_cost"],
-                    int(item["quantity"] * int(item["unit_cost"])),
+                    int(item["quantity"] * float(item["unit_cost"])),
                 ),
                 open=True,
             )
