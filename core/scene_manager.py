@@ -14,6 +14,7 @@ class SceneManager:
     def __init__(self, window):
         self.window = window
 
+    # metoda zmienia aktualnie wyświetlaną scenę
     def switch_scene(self, scene_index):
         scene = self.map_index_to_scene(scene_index)
 
@@ -23,6 +24,7 @@ class SceneManager:
         self.scene = scene
         self.scene.grid(row=0, column=0, sticky=NSEW)
 
+    # metoda mapuje indeks strony na odpowiednią klasę
     def map_index_to_scene(self, index):
         if index == PAGES["MENU"]:
             return Menu(self.window)

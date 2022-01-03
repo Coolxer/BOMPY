@@ -7,10 +7,10 @@ from config import PAGES
 import core.store as store
 from forms.message_box import MessageBox
 
-# klasa obługująca pliki
+# klasa obsługi plików
 class FileManager:
 
-    # metoda służąca do walidacji pliku wejściowego (zgodny z aplikacją)
+    # metoda sprawdza poprawność pliku wejściowego (zgodny z aplikacją)
     def validate(self, data):
         if "application" not in data or "name" not in data:
             return False
@@ -20,7 +20,7 @@ class FileManager:
 
         return True
 
-    # metoda wczytująca dane z pliku
+    # metoda wczytuje dane z pliku
     def load(self, path=None):
         ph = store.instance.get_file_path()
 
@@ -36,7 +36,7 @@ class FileManager:
 
         return data
 
-    # metoda zapisująca dane do pliku
+    # metoda zapisuje dane do pliku
     def save(self, path=None, data=None):
         dt = store.instance.get_data()
         ph = store.instance.get_file_path()
@@ -54,7 +54,7 @@ class FileManager:
         file.write(json.dumps(dt))
         file.close()
 
-    # metoda otwierająca okno do wyboru pliku zestawienia do odczytu
+    # metoda otwiera okno do wyboru pliku do odczytu
     def open_to_read(self, window):
         path = tk.filedialog.askopenfilename(
             title="Wybierz plik zawierajacy zestawienie",
@@ -79,7 +79,7 @@ class FileManager:
         store.instance.set_data(data)
         store.instance.get_scene_manager().switch_scene(PAGES["WORKPAGE"])
 
-    # metoda otwierająca okno do wyboru pliku zestawienia do zapisu
+    # metoda otwiera okno do wyboru pliku do zapisu
     def open_to_write(self):
         path = tk.filedialog.asksaveasfilename(
             title="Wybierz lokalizację pliku zestawienia",

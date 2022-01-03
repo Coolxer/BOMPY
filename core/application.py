@@ -35,6 +35,7 @@ class Application(tk.Tk):
         store.instance.set_window(self)
         store.instance.get_scene_manager().switch_scene(PAGES["MENU"])
 
+    # metoda definiuje rozmiar i pozycję okna aplikacji
     def define_window_geometry(self, window_width, window_height):
         screen_width = self.winfo_screenwidth()
         screen_height = self.winfo_screenheight()
@@ -46,5 +47,6 @@ class Application(tk.Tk):
             "%dx%d+%d+%d" % (window_width, window_height, x_pos, y_pos)
         )
 
+    # metoda uruchamia aplikację i nadsłuchiwanie zdarzeń
     def run(self):
         self.mainloop()

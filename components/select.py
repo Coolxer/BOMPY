@@ -2,7 +2,7 @@ from tkinter import OptionMenu, StringVar
 
 from config import FONTS, PALETTE
 
-
+# klasa wyboru opcji z listy
 class Select(OptionMenu):
     def __init__(self, window, values):
         self.value = StringVar()
@@ -19,8 +19,10 @@ class Select(OptionMenu):
         self["borderwidth"] = 5
         self["relief"] = "solid"
 
+    # metoda zwraca wybraną opcję
     def get_value(self):
         return self.value.get()
 
+    # metoda ustawia opcję
     def set_value(self, value):
         self.value.set(value)

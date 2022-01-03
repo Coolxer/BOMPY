@@ -28,7 +28,7 @@ class ObjectForm(Modal):
 
         self.create_widgets()
 
-    # metoda tworząca poszczególne etykiety i pola interaktywne odnośnie parametrów obiektu
+    # metoda tworzy poszczególne etykiety i pola interaktywne odnośnie parametrów obiektu
     def create_widgets(self):
         identifier_label = NormalText(
             window=super().get_frame(), text="Identyfikator"
@@ -84,7 +84,7 @@ class ObjectForm(Modal):
 
         super().show_buttons((6, 0), (6, 3))
 
-    # metoda walidująca dane, wywoływana po potwierdzeniu formularza
+    # metoda waliduje dane, wywoływana po potwierdzeniu formularza
     def confirm(self, el=None, item=None, result=None):
         identifier_output = self.identifier_input.validate()
         name_output = self.name_input.validate()
@@ -114,10 +114,11 @@ class ObjectForm(Modal):
                 message=msg,
             )
         else:
+            print("here")
             self.submit_action(el, item, result)
             super().get_frame().destroy()
 
-    # metoda ustawiająca dane w poszczególnych polach interaktywnych na starcie
+    # metoda ustawia dane w poszczególnych polach interaktywnych na starcie
     def init_values(self):
         values = store.instance.get_item()["values"]
 
@@ -127,11 +128,11 @@ class ObjectForm(Modal):
         self.unit_select.set_value(values[3])
         self.unit_cost_input.insert(0, values[4])
 
-    # metoda ustawiająca akcję potwierdzenia formularza
+    # metoda ustawia akcję potwierdzenia formularza
     def set_submit_action(self, submit_action):
         self.submit_action = submit_action
 
-    # metoda zwracająca obiekt z danymi formularza
+    # metoda zwraca obiekt z danymi formularza
     def get_form_values(self):
         obj = {
             "identifier": self.identifier_input.get_value(),

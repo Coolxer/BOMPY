@@ -2,7 +2,7 @@ from tkinter import Entry
 from functools import partial
 from config import PALETTE, FONTS
 
-
+# klasa interaktywnego pola tekstowego
 class Input(Entry):
     def __init__(
         self,
@@ -26,6 +26,7 @@ class Input(Entry):
         self.min_length = min_length
         self.max_length = max_length
 
+    # metoda mapuje długość na odpowiednią formę słowa 'znak'
     def characters_string(self, length):
         if length <= 1:
             return "znak"
@@ -34,6 +35,7 @@ class Input(Entry):
         else:
             return "znaków"
 
+    # metoda sprawdza poprawność danych wpisanych do pola edycji
     def validate(self):
         value = self.get_value()
         length = len(value)
@@ -45,20 +47,21 @@ class Input(Entry):
         else:
             if self.content_type == "string":
                 return ""
-            elif self.content_type == "integer":
+            elif self.content_type == "int":
                 try:
                     int(value)
-                    return ""
                 except ValueError:
                     return f"{self.input_name} musi być liczbą"
             elif self.content_type == "float":
                 try:
                     float(value.replace(",", "."))
-                    return ""
                 except ValueError:
                     return f"{self.input_name} musi być liczbą"
             else:
                 return ""
 
+        return ""
+
+    # metoda zwraca wartość pola edycji
     def get_value(self):
         return self.get()

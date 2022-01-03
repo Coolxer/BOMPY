@@ -6,7 +6,7 @@ import core.store as store
 from components.text import PageHeader, SectionHeader, NormalText
 from components.button import Button
 
-# Strona informacyjna aplikacji
+# strona informacyjna aplikacji
 class Credits(tk.Frame):
     def __init__(self, window):
         tk.Frame.__init__(self, window)

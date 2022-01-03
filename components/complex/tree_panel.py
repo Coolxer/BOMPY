@@ -9,7 +9,7 @@ from forms.remove_dialog import RemoveDialog
 from forms.edit_form import EditForm
 from forms.add_form import AddForm
 
-
+# klasa przycisku panelu widoku drzewa
 class TreePanelButton(Button):
     def __init__(self, window, text, type, command, arg=None):
         super().__init__(window, text, type, command, arg)
@@ -18,6 +18,7 @@ class TreePanelButton(Button):
         self["height"] = 2
 
 
+# klasa panelu sterującego widokiem drzewa
 class TreePanel(tk.PanedWindow):
     buttons = []
 
@@ -75,6 +76,7 @@ class TreePanel(tk.PanedWindow):
 
         self.buttons[len(self.buttons) - 1].set_state(tk.NORMAL)
 
+    # metoda modyfikuje rozmiar i funkcjonalność panelu sterującego
     def modify_panel(self, expand):
         if expand == False:
             self.buttons[1].grid_forget()
@@ -83,14 +85,18 @@ class TreePanel(tk.PanedWindow):
             self.buttons[1].grid()
             self.buttons[2].grid()
 
+    # metoda tworzy i wyświetla formularz dodawania nowego elementu
     def add_item(self):
         form = AddForm(self.window)
 
+    # metoda tworzy i wyświetla formularz usuwania wskazanego elementu
     def remove_item(self):
         dialog = RemoveDialog(self.window)
 
+    # metoda tworzy i wyświetla formularz edytowania wskazanego elementu
     def edit_item(self):
         form = EditForm(self.window)
 
+    # metoda zmienia scenę na menu główne
     def back_to_menu(self):
         store.instance.get_scene_manager().switch_scene(PAGES["MENU"])

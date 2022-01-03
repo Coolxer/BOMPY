@@ -3,7 +3,7 @@ from functools import partial
 
 from config import PALETTE, FONTS
 
-
+# klasa przycisku
 class Button(Btn):
     def __init__(self, window, text, type, command, arg=None):
         super().__init__(window)
@@ -23,5 +23,6 @@ class Button(Btn):
         self["font"] = FONTS["COMPONENT"]
         self["command"] = cmd
 
+    # metoda ustawia stan przycisku
     def set_state(self, state):
         self["state"] = state

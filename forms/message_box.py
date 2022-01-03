@@ -32,7 +32,7 @@ class MessageBox(Modal):
             pady=10,
         )
 
-    # metoda wywoyłwana w celu potwierdzenia i zamknięcia okna
+    # metoda wywoływana w celu potwierdzenia i zamknięcia okna
     def confirm(self):
         if self.confirm_callback is not None:
             self.confirm_callback(self.confirm_args)

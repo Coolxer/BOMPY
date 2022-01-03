@@ -9,7 +9,7 @@ from forms.message_box import MessageBox
 
 MAX_DISPLAYING_ITEMS = 10
 
-
+# klasa widoku drzewa
 class Tree(ttk.Treeview):
     scrollbar = None
 
@@ -128,7 +128,7 @@ class Tree(ttk.Treeview):
             for el in item["sub_parts"]:
                 self.build(el, item["identifier"])
 
-    # metoda przerysowująca drzewo
+    # metoda przerysowuje drzewo widoku
     def draw(self):
         self.first_iteration = True
         self.delete(*self.get_all_children())
@@ -151,7 +151,7 @@ class Tree(ttk.Treeview):
 
         self.panel.modify_panel(expand=True)
 
-    # metoda obsługująca pasek przewijania dla widoku drzewa
+    # metoda obsługuje pasek przewijania dla widoku drzewa
     def service_scrollbar(self, window):
         window.update_idletasks()
 
@@ -162,7 +162,7 @@ class Tree(ttk.Treeview):
 
         self.configure(yscrollcommand=self.scrollbar.set)
 
-    # metoda obsługująca zdarzenie wyboru elementu drzewa
+    # metoda obsługuje zdarzenie wyboru elementu drzewa
     def handleSelectEvent(self, event):
         selected = self.focus()
         store.instance.set_item(self.item(selected), selected)
@@ -177,7 +177,7 @@ class Tree(ttk.Treeview):
             for btn in self.panel.buttons:
                 btn.set_state(tk.NORMAL)
 
-    # metoda zwracająca wszystkie elementy drzewa, w tym zagnieżdżone
+    # metoda zwraca wszystkie elementy drzewa, w tym zagnieżdżone
     def get_all_children(self, item=""):
         children = self.get_children(item)
         for child in children:

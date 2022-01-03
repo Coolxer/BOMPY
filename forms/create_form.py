@@ -27,7 +27,7 @@ class CreateForm(Modal):
         self.create_widgets()
 
     # metoda sprawdza poprawność danych i ewentualnie zapisuje dane w pliku
-    def confirm(self):
+    def confirm(self, el=None, item=None, result=None):
         name_output = self.name_input.validate()
 
         if len(name_output):
@@ -38,9 +38,9 @@ class CreateForm(Modal):
                 message=name_output,
             )
         else:
-            super().get_frame().destroy()
-            store.instance.set_project_name(name_output)
+            store.instance.set_project_name(self.name_input.get_value())
             store.instance.get_file_manager().open_to_write()
+            super().get_frame().destroy()
 
     # metoda tworzy widżety niezbędne dla tego okna
     def create_widgets(self):

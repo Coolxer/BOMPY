@@ -1,7 +1,7 @@
 from forms.modal import Modal
 import core.store as store
 
-# klasa reprezentująca okno potwierdzające chęć usunięcia obiektu
+# klasa okna potwierdzającego chęć usunięcia obiektu
 class RemoveDialog(Modal):
     def __init__(self, window):
         super().__init__(

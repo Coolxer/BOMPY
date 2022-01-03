@@ -51,7 +51,7 @@ class Modal(tk.Frame):
 
         return -1
 
-    # akcja wykonywana po naciśnięciu przycisku potwierdzenia
+    # metoda wykonywana po naciśnięciu przycisku potwierdzenia
     def confirm_action(self):
         if self.lookup:
             if store.instance.get_identifier() == "#":
@@ -61,6 +61,8 @@ class Modal(tk.Frame):
 
             store.instance.get_file_manager().save()
             store.instance.call_refresh_callback()
+        else:
+            self.confirm()
 
         if (
             self.confirm_auto_destroy is not None
@@ -68,7 +70,7 @@ class Modal(tk.Frame):
         ):
             self.frame.destroy()
 
-    # akcja wykonywana po naciśnięciu przycisku "Anuluj"
+    # metoda wykonywana po naciśnięciu przycisku "Anuluj"
     def cancel_action(self):
         self.cancel()
         self.frame.destroy()
@@ -81,7 +83,7 @@ class Modal(tk.Frame):
     def cancel(self):
         pass
 
-    # metoda definiująca rozmiar i pozycję okna modalnego
+    # metoda definuje rozmiar i pozycję okna modalnego
     def define_window_geometry(self, window_width, window_height):
         screen_width = self.winfo_screenwidth()
         screen_height = self.winfo_screenheight()
@@ -93,7 +95,7 @@ class Modal(tk.Frame):
             "%dx%d+%d+%d" % (window_width, window_height, x_pos, y_pos)
         )
 
-    # metoda tworząca okno modalne
+    # metoda tworzy okno modalne
     def create_window(
         self, window, title, size, message, confirm_text, rows, columns
     ):
@@ -128,7 +130,7 @@ class Modal(tk.Frame):
 
         self.define_window_geometry(size[0], size[1])
 
-    # metoda wyświetlająca przyciski potwierdzenia i rezygnacji na odpowiednich pozycjach układu
+    # metoda wyświetla przyciski potwierdzenia i rezygnacji na odpowiednich pozycjach układu
     def show_buttons(self, cf_btn_pos, cn_btn_pos):
         self.confirm_btn.grid(
             row=cf_btn_pos[0],
@@ -145,10 +147,10 @@ class Modal(tk.Frame):
             pady=10,
         )
 
-    # metoda zwracająca przyciski
+    # metoda zwraca przyciski
     def get_buttons(self):
         return [self.confirm_btn, self.cancel_btn]
 
-    # metoda zwracająca okno modalne
+    # metoda zwraca okno modalne
     def get_frame(self):
         return self.frame
