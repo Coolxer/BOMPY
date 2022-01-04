@@ -151,9 +151,11 @@ class Tree(ttk.Treeview):
 
     # metoda przelicza wysokość elementów drzewa
     def calculate_height(self, event=None):
-        items = self.get_all_children()
+        items = len(self.get_all_children()) - 1
 
-        if (len(items) - 1) < MAX_DISPLAYING_ITEMS:
+        if items == 0:
+            self["height"] = 0
+        elif items < MAX_DISPLAYING_ITEMS:
             self["height"] = items
         else:
             self["height"] = MAX_DISPLAYING_ITEMS - 1

@@ -1,1 +1,146 @@
-{"application": "bompy", "name": "rower", "sub_parts": [{"identifier": "000001", "name": "rama", "quantity": 1, "unit": "szt.", "unit_cost": 210.45, "sub_parts": [{"identifier": "000011", "name": "\u0142a\u0144cuch", "quantity": 1, "unit": "szt.", "unit_cost": 32.5, "sub_parts": []}, {"identifier": "000012", "name": "peda\u0142", "quantity": 2, "unit": "szt.", "unit_cost": 15, "sub_parts": []}, {"identifier": "000013", "name": "z\u0119batka", "quantity": 5, "unit": "szt.", "unit_cost": 19.99, "sub_parts": [{"identifier": "000131", "name": "\u0142o\u017cysko", "quantity": 5, "unit": "szt.", "unit_cost": 8.5, "sub_parts": []}]}, {"identifier": "000014", "name": "tarcza", "quantity": 2, "unit": "szt.", "unit_cost": 24, "sub_parts": []}]}, {"identifier": "000002", "name": "ko\u0142o", "quantity": 2, "unit": "szt.", "unit_cost": 250, "sub_parts": [{"identifier": "000021", "name": "szprycha", "quantity": 80, "unit": "szt.", "unit_cost": 1.99, "sub_parts": []}, {"identifier": "000022", "name": "opona", "quantity": 2, "unit": "szt.", "unit_cost": 24.2, "sub_parts": []}, {"identifier": "000023", "name": "piasta", "quantity": 2, "unit": "szt.", "unit_cost": 50, "sub_parts": []}, {"identifier": "000024", "name": "odblask", "quantity": 4, "unit": "szt.", "unit_cost": 2, "sub_parts": []}, {"identifier": "000025", "name": "wentyl", "quantity": 2, "unit": "szt.", "unit_cost": 7, "sub_parts": []}]}, {"identifier": "000003", "name": "kierownica", "quantity": 1, "unit": "szt.", "unit_cost": 279.95, "sub_parts": [{"identifier": "000031", "name": "dzwonek", "quantity": 1, "unit": "szt.", "unit_cost": 9.99, "sub_parts": []}, {"identifier": "000032", "name": "przerzutka", "quantity": 2, "unit": "szt.", "unit_cost": 84.99, "sub_parts": []}, {"identifier": "000033", "name": "hamulec", "quantity": 2, "unit": "szt.", "unit_cost": 49.99, "sub_parts": []}]}, {"identifier": "000004", "name": "siode\u0142ko", "quantity": 1, "unit": "szt.", "unit_cost": 37.25, "sub_parts": []}]}
+{
+  "application": "bompy",
+  "name": "rower",
+  "sub_parts": [
+    {
+      "identifier": "000001",
+      "name": "rama",
+      "quantity": 1,
+      "unit": "szt.",
+      "unit_cost": 210.45,
+      "sub_parts": [
+        {
+          "identifier": "000011",
+          "name": "\u0142a\u0144cuch",
+          "quantity": 1,
+          "unit": "szt.",
+          "unit_cost": 32.5,
+          "sub_parts": []
+        },
+        {
+          "identifier": "000012",
+          "name": "peda\u0142",
+          "quantity": 2,
+          "unit": "szt.",
+          "unit_cost": 15,
+          "sub_parts": []
+        },
+        {
+          "identifier": "000013",
+          "name": "z\u0119batka",
+          "quantity": 5,
+          "unit": "szt.",
+          "unit_cost": 19.99,
+          "sub_parts": [
+            {
+              "identifier": "000131",
+              "name": "\u0142o\u017cysko",
+              "quantity": 5,
+              "unit": "szt.",
+              "unit_cost": 8.5,
+              "sub_parts": []
+            }
+          ]
+        },
+        {
+          "identifier": "000014",
+          "name": "tarcza",
+          "quantity": 2,
+          "unit": "szt.",
+          "unit_cost": 24,
+          "sub_parts": []
+        }
+      ]
+    },
+    {
+      "identifier": "000002",
+      "name": "ko\u0142o",
+      "quantity": 2,
+      "unit": "szt.",
+      "unit_cost": 250,
+      "sub_parts": [
+        {
+          "identifier": "000021",
+          "name": "szprycha",
+          "quantity": 80,
+          "unit": "szt.",
+          "unit_cost": 1.99,
+          "sub_parts": []
+        },
+        {
+          "identifier": "000022",
+          "name": "opona",
+          "quantity": 2,
+          "unit": "szt.",
+          "unit_cost": 24.2,
+          "sub_parts": []
+        },
+        {
+          "identifier": "000023",
+          "name": "piasta",
+          "quantity": 2,
+          "unit": "szt.",
+          "unit_cost": 50,
+          "sub_parts": []
+        },
+        {
+          "identifier": "000024",
+          "name": "odblask",
+          "quantity": 4,
+          "unit": "szt.",
+          "unit_cost": 2,
+          "sub_parts": []
+        },
+        {
+          "identifier": "000025",
+          "name": "wentyl",
+          "quantity": 2,
+          "unit": "szt.",
+          "unit_cost": 7,
+          "sub_parts": []
+        }
+      ]
+    },
+    {
+      "identifier": "000003",
+      "name": "kierownica",
+      "quantity": 1,
+      "unit": "szt.",
+      "unit_cost": 279.95,
+      "sub_parts": [
+        {
+          "identifier": "000031",
+          "name": "dzwonek",
+          "quantity": 1,
+          "unit": "szt.",
+          "unit_cost": 9.99,
+          "sub_parts": []
+        },
+        {
+          "identifier": "000032",
+          "name": "przerzutka",
+          "quantity": 2,
+          "unit": "szt.",
+          "unit_cost": 84.99,
+          "sub_parts": []
+        },
+        {
+          "identifier": "000033",
+          "name": "hamulec",
+          "quantity": 2,
+          "unit": "szt.",
+          "unit_cost": 49.99,
+          "sub_parts": []
+        }
+      ]
+    },
+    {
+      "identifier": "000004",
+      "name": "siode\u0142ko",
+      "quantity": 1,
+      "unit": "szt.",
+      "unit_cost": 37.25,
+      "sub_parts": []
+    }
+  ]
+}
