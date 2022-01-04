@@ -12,6 +12,7 @@ class Store:
         self.selected_item = None
         self.identifier = None
         self.refresh_callback = None
+        self.child_func = None
 
     def set_window(self, window):
         self.window = window
@@ -61,6 +62,12 @@ class Store:
 
     def call_refresh_callback(self):
         self.refresh_callback()
+
+    def set_child_func(self, child_func):
+        self.child_func = child_func
+
+    def call_child_func(self):
+        return self.child_func()
 
 
 instance = Store()

@@ -24,9 +24,12 @@ class Tree(ttk.Treeview):
 
         self["selectmode"] = "browse"
         self.prepare_columns()
-        self.service_scrollbar(window)
+        self.service_scrollbar()
 
+        self.bind("<<TreeviewOpen>>", self.calculate_height)
+        self.bind("<<TreeviewClose>>", self.calculate_height)
         self.bind("<<TreeviewSelect>>", self.handleSelectEvent)
+
         self.draw()
 
     # metoda ustawia styl dla widoku drzewa
@@ -99,7 +102,9 @@ class Tree(ttk.Treeview):
                     item["quantity"],
                     item["unit"],
                     item["unit_cost"],
-                    int(item["quantity"] * float(item["unit_cost"])),
+                    round(
+                        float(item["quantity"] * float(item["unit_cost"])), 2
+                    ),
                 ),
                 open=True,
             )
@@ -142,21 +147,25 @@ class Tree(ttk.Treeview):
             values=("", "", "", "", ""),
         )
 
-        items = len(self.get_all_children()) - 1
+        self.calculate_height()
 
-        if items < MAX_DISPLAYING_ITEMS:
+    # metoda przelicza wysokość elementów drzewa
+    def calculate_height(self, event=None):
+        items = self.get_all_children()
+
+        if (len(items) - 1) < MAX_DISPLAYING_ITEMS:
             self["height"] = items
         else:
-            self["height"] = MAX_DISPLAYING_ITEMS
+            self["height"] = MAX_DISPLAYING_ITEMS - 1
 
         self.panel.modify_panel(expand=True)
 
     # metoda obsługuje pasek przewijania dla widoku drzewa
-    def service_scrollbar(self, window):
-        window.update_idletasks()
+    def service_scrollbar(self):
+        self.window.update_idletasks()
 
         self.scrollbar = ttk.Scrollbar(
-            window, orient="vertical", command=self.yview
+            self.window, orient="vertical", command=self.yview
         )
         self.scrollbar.grid(row=1, column=2, sticky=tk.NSEW, padx=30)
 

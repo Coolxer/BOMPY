@@ -27,9 +27,8 @@ class FileManager:
         if path is not None:
             ph = path
 
-        file = open(ph, "r")
-        data = json.load(file)
-        file.close()
+        with open(ph, encoding="utf-8") as file:
+            data = json.load(file)
 
         if not self.validate(data):
             return None

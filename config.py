@@ -7,8 +7,8 @@ BASE_CONFIG = {
     "WINDOW": {
         "MIN_WIDTH": 500,
         "MIN_HEIGHT": 500,
-        "DEFAULT_WIDTH": 900,
-        "DEFAULT_HEIGHT": 700,
+        "DEFAULT_WIDTH": 1000,
+        "DEFAULT_HEIGHT": 720,
     },
 }
 

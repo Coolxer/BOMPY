@@ -87,6 +87,18 @@ class ObjectForm(Modal):
     # metoda waliduje dane, wywoływana po potwierdzeniu formularza
     def confirm(self, el=None, item=None, result=None):
         identifier_output = self.identifier_input.validate()
+
+        if not len(identifier_output):
+            childs = store.instance.call_child_func()
+
+            for child in childs:
+                if (
+                    child == self.identifier_input.get_value()
+                    and child != store.instance.get_identifier()
+                ):
+                    identifier_output = "Identyfikator musi być unikatowy!"
+                    break
+
         name_output = self.name_input.validate()
         quantity_output = self.quantity_input.validate()
         unit_cost_output = self.unit_cost_input.validate()
@@ -98,6 +110,7 @@ class ObjectForm(Modal):
             or len(unit_cost_output)
         ):
             msg = ""
+
             if len(identifier_output):
                 msg = identifier_output
             elif len(name_output):
@@ -113,6 +126,7 @@ class ObjectForm(Modal):
                 size=(700, 150),
                 message=msg,
             )
+
         else:
             self.submit_action(el, item, result)
             super().get_frame().destroy()
@@ -127,10 +141,6 @@ class ObjectForm(Modal):
         self.unit_select.set_value(values[3])
         self.unit_cost_input.insert(0, values[4])
 
-    # metoda ustawia akcję potwierdzenia formularza
-    def set_submit_action(self, submit_action):
-        self.submit_action = submit_action
-
     # metoda zwraca obiekt z danymi formularza
     def get_form_values(self):
         obj = {
@@ -144,3 +154,7 @@ class ObjectForm(Modal):
         }
 
         return obj
+
+    # metoda ustawia akcję potwierdzenia formularza
+    def set_submit_action(self, submit_action):
+        self.submit_action = submit_action

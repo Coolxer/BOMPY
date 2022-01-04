@@ -16,18 +16,18 @@ class WorkPage(tk.Frame):
 
         self.configure(background=PALETTE["BACKGROUND"])
         self.rowconfigure([0, 1], weight=1)
-        self.columnconfigure(0, weight=1)
+        self.columnconfigure([0], weight=1)
 
         panel = TreePanel(self)
         tree = Tree(self, panel)
 
         store.instance.set_refresh_callback(tree.draw)
+        store.instance.set_child_func(tree.get_all_children)
 
         PageHeader(
             self,
-            text=f"Zestawienie BOM dla: {store.instance.get_project_name()}",
+            text=store.instance.get_project_name().upper(),
         ).grid(row=0, column=0, ipady=30)
 
-        tree.grid(row=1, column=0, ipadx=20, ipady=20)
-
+        tree.grid(row=1, column=0, ipady=20)
         panel.grid(row=2, column=0, sticky=tk.S, pady=30)
